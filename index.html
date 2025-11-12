@@ -63,10 +63,17 @@
 
                 <div class="pack-section">
                     <h2>Convert Duplicates</h2>
-                    <p>(Coming soon: Trade your extra cards for new packs)</p>
-                    <div id="duplicate-conversion-area">
-                        <button class="game-button" disabled>Convert (Soon)</button>
+                    <p>Select extra cards (count > 1) to convert them into a new pack.</p>
+                    
+                    <div id="converter-summary">
+                        <span id="converter-points">Total Points: 0</span>
+                        <span id="converter-reward">Reward: (None)</span>
+                        <button id="converter-confirm-btn" class="game-button" disabled>Convert</button>
                     </div>
+
+                    <p>Your Duplicates:</p>
+                    <div id="converter-grid" class="card-grid">
+                        </div>
                 </div>
 
             </div>
