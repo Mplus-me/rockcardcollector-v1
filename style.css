@@ -327,3 +327,100 @@ h1, h2 {
     color: #D95525; /* Rust color */
     margin-bottom: 10px;
 }
+
+/* --- 9. Header Pack Inventory Styles --- */
+.game-header {
+    /* Make the header a flexbox to align title and packs */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pack-inventory {
+    display: flex;
+    gap: 10px;
+}
+
+.pack-display {
+    background-color: #E0DAB9;
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-family: 'Verdana', sans-serif;
+    color: #3D405B;
+    text-align: center;
+}
+
+.pack-display .pack-count {
+    font-size: 20px;
+    font-weight: bold;
+    color: #D95525; /* Rust */
+}
+
+.pack-display .pack-name {
+    font-size: 12px;
+}
+
+/* --- 10. Packs Panel Styles --- */
+.pack-section {
+    background-color: #E0DAB9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* We can re-use .pack-display for the buttons */
+#pack-opening-area .pack-display {
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#pack-opening-area .pack-display:hover {
+    background-color: #c9c1a5;
+}
+
+#pack-opening-area .pack-display:active {
+    transform: scale(0.95);
+}
+
+/* Style for "disabled" (0 pack) buttons */
+#pack-opening-area .pack-display.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #E0DAB9;
+    transform: none;
+}
+#pack-opening-area .pack-display.disabled .pack-count {
+    color: #999;
+}
+
+
+/* --- 11. Minigame Panel Styles --- */
+.minigame-container {
+    background-color: #F4F1DE; /* Light parchment */
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.minigame-container h4 {
+    color: #3D405B;
+    margin-bottom: 5px;
+}
+
+#fishing-pond {
+    margin-top: 10px;
+    padding: 20px;
+    background-color: #a2c5d1; /* Cozy pond blue */
+    border-radius: 5px;
+    text-align: center;
+}
+
+#fishing-status {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 15px;
+    height: 20px; /* Give it a set height so layout doesn't jump */
+}
