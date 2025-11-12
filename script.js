@@ -114,7 +114,7 @@ function loadState() {
             inventory: {
                 cards: [] // Starts with an empty card inventory
             },
-            expeditions: [] // No expeditions running
+            expeditions: [], // No expeditions running
 
             // Load museum
             museum: {
