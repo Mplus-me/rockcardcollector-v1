@@ -163,3 +163,86 @@ h1, h2 {
     padding: 1px 4px;
     min-width: 20px;
 }
+
+/* --- 6. Museum Panel Styles --- */
+
+/* This is the main "stage" area */
+#museum-display {
+    width: 100%;
+    padding: 20px;
+    background-color: #3D405B; /* Dark earthy blue */
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* This div will hold the background image */
+#museum-background {
+    width: 100%;
+    min-height: 400px;
+    
+    /* Placeholder background */
+    background-color: #5a5f8a;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+    
+    /* In the future, this will be set by JS, e.g.: */
+    /* background-image: url('images/museum/bg-forest.png'); */
+    
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+/* We re-use the .card-grid class, but give the museum grid a specific height */
+#museum-grid {
+    min-height: 380px;
+}
+
+/* This is the style for an individual museum slot */
+.museum-slot {
+    width: 120px;
+    height: 170px; /* Taller than archive cards to look like a "slot" */
+    
+    /* Empty slot style */
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 3px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    
+    /* Center the placeholder text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* This style applies when a card is being DRAGGED OVER the slot */
+.museum-slot.drag-over {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: #fff;
+}
+
+/* This is the style for a slot that has a card IN it */
+.museum-slot.filled {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    /* We re-use the card style, but make it clickable */
+    cursor: pointer;
+}
+
+/* This is the style for a card being DRAGGED from the archive */
+.card-in-grid.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#museum-cosmetics {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #E0DAB9;
+    border-radius: 8px;
+}
