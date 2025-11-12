@@ -1,0 +1,22 @@
+{
+  "basic": {
+    "common": 80,
+    "uncommon": 15,
+    "rare": 5
+  },
+  "standard": {
+    "common": 50,
+    "uncommon": 35,
+    "rare": 15
+  },
+  "premium": {
+    "common": 20,
+    "uncommon": 50,
+    "rare": 30
+  },
+  "curated": {
+    "common": 0,
+    "uncommon": 50,
+    "rare": 50
+  }
+}
