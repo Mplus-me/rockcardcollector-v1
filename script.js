@@ -209,7 +209,14 @@ function updateArchiveUI() {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card-in-grid');
         // Add rarity as a class for styling (e.g., "rarity-common")
-        cardElement.classList.add(`rarity-${cardData.rarity}`); 
+        cardElement.classList.add(`rarity-${cardData.rarity}`);
+
+        // Make the card draggable
+        cardElement.draggable = true;
+        
+        // Store the card's data on the element
+        cardElement.dataset.cardId = card.cardId;
+        cardElement.dataset.variant = card.variant;
 
         // Get the image path
         const imgPath = getCardImagePath(card.cardId, card.variant);
