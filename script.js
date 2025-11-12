@@ -30,8 +30,31 @@ const RARITY_ORDER = [
     "common"
 ];
 
+// Conversion point values for each rarity
+const CONVERSION_POINTS = {
+    common: 1,
+    uncommon: 3,
+    rare: 10,
+    mythic: 30,
+    legendary: 100,
+    special: 0 // "Special" cards are worth 0 points
+};
+
+// Point thresholds for each pack
+// We list them from best to worst
+const PACK_THRESHOLDS = [
+    { name: "curated", points: 250 },
+    { name: "premium", points: 100 },
+    { name: "standard", points: 30 },
+    { name: "basic", points: 10 }
+];
+
 /** @type {GameState} */
 let gameState = {}; // Holds the player's save data (packs, cards, etc.)
+
+// Temporary state for the converter.
+// Holds an array of objects: [{cardId, variant, count}]
+let conversionSelection = [];
 
 let allCardsData = {}; // Holds all card definitions from cards.json
 let allPacksData = {}; // Holds all pack drop rates from packs.json
@@ -73,6 +96,7 @@ async function initGame() {
     initMuseum(); // Initialize museum
     initExpeditions(); // Initialize expeditions
     initFishingMinigame(); // Initialize fishing minigame
+    initConverter(); // Initialize duplicate converter
     
     updateUI(); // Draw the UI (like the archive) with the loaded data
 
@@ -228,6 +252,11 @@ function showPanel(panelId) {
 
     // Loop over them
     panels.forEach(panel => {
+
+        if (panel.id === 'packs-panel' && panel.classList.contains('active-panel')) {
+            leavingPacksPanel = true;
+        }
+        
         if (panel.id === panelId) {
             // If it's the one we want, add 'active-panel' to show it
             panel.classList.add('active-panel');
@@ -236,6 +265,10 @@ function showPanel(panelId) {
             panel.classList.remove('active-panel');
         }
     });
+
+    if (leavingPacksPanel && panelId !== 'packs-panel') {
+        clearConverterSelection();
+    }
 }
 
 /**
@@ -249,6 +282,7 @@ function updateUI() {
     updateMuseumUI();
     updateExpeditionsUI();
     updatePackInventoryUI();
+    updateConverterUI();
     
     // Later, this will also call:
     // - updatePackCountUI()
@@ -1003,6 +1037,213 @@ function resetFishingGame() {
     button.textContent = "Cast";
     button.classList.remove('claim-button');
     status.textContent = ""; // Clear status
+}
+
+/*
+================================================================================
+SECTION 7: DUPLICATE CONVERTER
+================================================================================
+*/
+
+/**
+ * Sets up the click listener for the main "Convert" button.
+ */
+function initConverter() {
+    const button = document.getElementById('converter-confirm-btn');
+    if (button) {
+        button.addEventListener('click', confirmConversion);
+    }
+}
+
+/**
+ * Clears the current converter selection and resets the UI.
+ */
+function clearConverterSelection() {
+    conversionSelection = [];
+    updateConverterUI(); // This will redraw the grid and summary
+}
+
+/**
+ * Redraws the grid of duplicate cards.
+ */
+function updateConverterUI() {
+    const grid = document.getElementById('converter-grid');
+    if (!grid) return; // Not on the right panel
+
+    grid.innerHTML = ''; // Clear the grid
+
+    // Find all cards in inventory with more than 1 copy
+    const duplicates = gameState.inventory.cards.filter(card => card.count > 1);
+
+    duplicates.forEach(card => {
+        const cardData = allCardsData[card.cardId];
+        if (!cardData) return; // Skip if data is missing
+
+        // Check if this card is in our current selection
+        const selectedEntry = conversionSelection.find(c => 
+            c.cardId === card.cardId && c.variant === card.variant
+        );
+        
+        // This is the card element in the grid
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card-in-grid');
+        cardElement.classList.add(`rarity-${cardData.rarity}`);
+        
+        if (selectedEntry) {
+            cardElement.classList.add('selected'); // Highlight if selected
+        }
+
+        // Get the image path
+        const imgPath = getCardImagePath(card.cardId, card.variant);
+
+        // How many are available to convert (total count - 1)
+        const availableCount = card.count - 1;
+        // How many are *currently* selected
+        const selectedCount = selectedEntry ? selectedEntry.count : 0;
+
+        cardElement.innerHTML = `
+            <div class="card-image-placeholder">
+                <img src="${imgPath}" alt="${cardData.name}">
+            </div>
+            <div class="card-info">
+                <span class="card-name">${cardData.name}</span>
+                <span class="card-count">x(${selectedCount}/${availableCount})</span>
+            </div>
+        `;
+        
+        // Add click listener to select/deselect this card
+        cardElement.addEventListener('click', () => {
+            toggleCardForConversion(card.cardId, card.variant);
+        });
+        
+        grid.appendChild(cardElement);
+    });
+
+    // After drawing the grid, update the summary (points, reward)
+    updateConversionSummary();
+}
+
+/**
+ * Called when a card in the converter grid is clicked.
+ * Adds/removes one copy of the card to the selection.
+ * @param {string} cardId
+ * @param {string} variant
+ */
+function toggleCardForConversion(cardId, variant) {
+    const playerCard = gameState.inventory.cards.find(c => 
+        c.cardId === cardId && c.variant === variant
+    );
+    if (!playerCard) return; // Should never happen
+
+    const availableCount = playerCard.count - 1;
+    if (availableCount <= 0) return; // No duplicates to select
+
+    let selectionEntry = conversionSelection.find(c => 
+        c.cardId === cardId && c.variant === variant
+    );
+
+    if (!selectionEntry) {
+        // Not in selection yet, add 1
+        conversionSelection.push({ cardId, variant, count: 1 });
+    } else {
+        // Already in selection, increment count
+        if (selectionEntry.count < availableCount) {
+            // We can add more
+            selectionEntry.count += 1;
+        } else {
+            // We've selected all available copies, so clicking again removes it
+            selectionEntry.count = 0;
+            // Remove from array if count is 0
+            conversionSelection = conversionSelection.filter(c => c.count > 0);
+        }
+    }
+    
+    // Redraw the entire converter UI to show new counts
+    updateConverterUI();
+}
+
+/**
+ * Calculates points and updates the summary text and button.
+ */
+function updateConversionSummary() {
+    let totalPoints = 0;
+
+    conversionSelection.forEach(card => {
+        const cardData = allCardsData[card.cardId];
+        const pointsPerCard = CONVERSION_POINTS[cardData.rarity] || 0;
+        totalPoints += pointsPerCard * card.count;
+    });
+
+    // Find the best pack the player has earned
+    let reward = "(None)";
+    for (const pack of PACK_THRESHOLDS) {
+        if (totalPoints >= pack.points) {
+            reward = `${pack.name.charAt(0).toUpperCase() + pack.name.slice(1)} Pack`;
+            break; // Stop at the first (best) pack we qualify for
+        }
+    }
+
+    // Update the UI
+    document.getElementById('converter-points').textContent = `Total Points: ${totalPoints}`;
+    document.getElementById('converter-reward').textContent = `Reward: ${reward}`;
+    
+    // Enable/disable the confirm button
+    const confirmButton = document.getElementById('converter-confirm-btn');
+    confirmButton.disabled = (reward === "(None)");
+}
+
+/**
+ * Finalizes the conversion: removes cards, adds the pack.
+ */
+function confirmConversion() {
+    let totalPoints = 0;
+    let finalReward = null;
+
+    // 1. Calculate points and reward (again, as a safety check)
+    conversionSelection.forEach(card => {
+        const cardData = allCardsData[card.cardId];
+        const pointsPerCard = CONVERSION_POINTS[cardData.rarity] || 0;
+        totalPoints += pointsPerCard * card.count;
+    });
+
+    for (const pack of PACK_THRESHOLDS) {
+        if (totalPoints >= pack.points) {
+            finalReward = pack.name; // Just the name, e.g., "basic"
+            break;
+        }
+    }
+
+    // 2. Safety check: If no reward, stop.
+    if (!finalReward) {
+        console.warn("Conversion confirmed with no reward. Aborting.");
+        return;
+    }
+
+    // 3. Remove the selected cards from inventory
+    conversionSelection.forEach(selectedCard => {
+        const playerCard = gameState.inventory.cards.find(c =>
+            c.cardId === selectedCard.cardId && c.variant === selectedCard.variant
+        );
+        if (playerCard) {
+            playerCard.count -= selectedCard.count;
+            // Note: We don't remove the card if count hits 0,
+            // because this logic only selects from cards where count > 1,
+            // so the count will always be at least 1 after subtraction.
+        }
+    });
+
+    // 4. Add the new pack
+    addPackToInventory(finalReward, 1);
+    
+    // 5. Alert the player
+    alert(`Cards converted! You received 1 ${finalReward} Pack!`);
+    
+    // 6. Reset the converter
+    clearConverterSelection();
+    
+    // 7. Save and refresh everything
+    saveState();
+    updateUI(); // This will refresh the converter grid *and* pack counts
 }
 
 
