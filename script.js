@@ -231,6 +231,9 @@ function updateArchiveUI() {
                 <span class="card-count">x${card.count}</span>
             </div>
         `;
+
+        // Add the 'dragstart' event listener
+        cardElement.addEventListener('dragstart', handleCardDragStart);
         
         // Add the new card element to the grid
         grid.appendChild(cardElement);
