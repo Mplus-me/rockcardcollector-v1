@@ -115,6 +115,14 @@ function loadState() {
                 cards: [] // Starts with an empty card inventory
             },
             expeditions: [] // No expeditions running
+
+            // Load museum
+            museum: {
+                background: 'bg-forest', // Placeholder name
+                frame: 'frame-1',        // Placeholder name
+                // An array to hold our 6 slots. 'null' means empty.
+                slots: [null, null, null, null, null, null] 
+            }
         };
         console.log("No save found. Created new game state.");
         // We save immediately so it's stored for next time.
