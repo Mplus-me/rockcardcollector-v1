@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Rock Collector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="game-header">
+        <h1>My Cozy Rocks</h1>
+    </header>
+
+    <div class="app-container">
+        
+        <nav class="main-nav">
+            <img src="images/ui/nav-archive.png" alt="Archive" class="nav-button" data-panel="archive-panel">
+            <img src="images/ui/nav-museum.png" alt="Museum" class="nav-button" data-panel="museum-panel">
+            <img src="images/ui/nav-packs.png" alt="Packs" class="nav-button" data-panel="packs-panel">
+            <img src="images.ui/nav-expeditions.png" alt="Expeditions" class="nav-button" data-panel="expeditions-panel">
+        </nav>
+
+        <main class="main-content">
+            
+            <div id="archive-panel" class="panel active-panel">
+                <h2>Archive</h2>
+                <p>All your collected rocks will appear here.</p>
+            </div>
+
+            <div id="museum-panel" class="panel">
+                <h2>Museum</h2>
+                <p>Display your favorite rocks here.</p>
+            </div>
+
+            <div id="packs-panel" class="panel">
+                <h2>Packs</h2>
+                <p>Open packs and convert duplicates here.</p>
+            </div>
+
+            <div id="expeditions-panel" class="panel">
+                <h2>Expeditions & Minigames</h2>
+                <p>Send out expeditions and play minigames here.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
