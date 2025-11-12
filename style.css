@@ -246,3 +246,84 @@ h1, h2 {
     background-color: #E0DAB9;
     border-radius: 8px;
 }
+
+/* --- 7. Generic Button Style --- */
+/* We can reuse this for all our buttons */
+.game-button {
+    background-color: #D95525; /* Rust */
+    color: #fff;
+    font-family: 'Verdana', sans-serif;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.game-button:hover {
+    background-color: #b9481f;
+}
+
+.game-button:disabled {
+    background-color: #C9C1A5; /* Grayed out */
+    color: #F4F1DE;
+    cursor: not-allowed;
+}
+
+/* "Complete" button should stand out */
+.game-button.claim-button {
+    background-color: #88a236; /* Mossy Green */
+}
+.game-button.claim-button:hover {
+    background-color: #6d832b;
+}
+
+
+/* --- 8. Expeditions Panel Styles --- */
+#expedition-section, #minigame-section {
+    background-color: #E0DAB9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.expedition-grid {
+    display: grid;
+    /* This will create 3 columns, each 1/3 of the space */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.expedition-slot {
+    background-color: #F4F1DE; /* Light parchment */
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.expedition-slot h4 {
+    color: #3D405B;
+    margin-bottom: 5px;
+}
+
+.expedition-slot .status {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+    flex-grow: 1; /* Pushes button to the bottom */
+}
+
+.expedition-slot .timer {
+    font-size: 22px;
+    font-weight: bold;
+    color: #D95525; /* Rust color */
+    margin-bottom: 10px;
+}
