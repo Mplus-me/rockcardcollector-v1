@@ -429,3 +429,39 @@ h1, h2 {
     margin-top: 15px;
     height: 20px; /* Give it a set height so layout doesn't jump */
 }
+
+/* --- 12. Duplicate Converter Styles --- */
+#converter-summary {
+    background-color: #F4F1DE;
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Verdana', sans-serif;
+}
+
+#converter-points, #converter-reward {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3D405B;
+}
+
+#converter-reward {
+    color: #88a236; /* Mossy Green */
+}
+
+/* This is the style for a card in the grid that has been clicked */
+.card-in-grid.selected {
+    box-shadow: 0 0 12px 3px #f39c12; /* A bright gold glow */
+    transform: scale(1.05);
+    background-color: #fdfbe9;
+}
+
+/* We re-use .card-in-grid, but make them clickable */
+#converter-grid .card-in-grid {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
