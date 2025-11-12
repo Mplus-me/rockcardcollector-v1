@@ -240,6 +240,28 @@ function updateArchiveUI() {
     });
 }
 
+/**
+ * Handles the 'dragstart' event for a card in the archive.
+ * @param {DragEvent} event
+ */
+function handleCardDragStart(event) {
+    // 'this' refers to the cardElement we're dragging
+    const cardId = this.dataset.cardId;
+    const variant = this.dataset.variant;
+
+    // Store the card's data for the 'drop' event
+    event.dataTransfer.setData('text/plain', JSON.stringify({ cardId, variant }));
+    event.dataTransfer.effectAllowed = 'copy';
+
+    // Add a class for styling
+    this.classList.add('dragging');
+
+    // Remove the class when the drag ends (whether it was dropped or not)
+    this.addEventListener('dragend', () => {
+        this.classList.remove('dragging');
+    }, { once: true }); // 'once: true' automatically removes this listener
+}
+
 
 // --- 4. PACK OPENING LOGIC ---
 
