@@ -329,6 +329,61 @@ function handleMuseumDrop(event) {
     updateMuseumUI();
 }
 
+/**
+ * Draws the cards into the Museum panel based on gameState.
+ */
+function updateMuseumUI() {
+    // First, update the background (we'll make this work later)
+    const backgroundEl = document.getElementById('museum-background');
+    if (backgroundEl) {
+        // This won't work yet as we don't have the image, but it's ready
+        // backgroundEl.style.backgroundImage = `url('images/museum/${gameState.museum.background}.png')`;
+    }
+
+    // Loop over all the slot elements
+    const slots = document.querySelectorAll('.museum-slot');
+    slots.forEach(slot => {
+        const slotIndex = parseInt(slot.dataset.slotIndex);
+        const cardInSlot = gameState.museum.slots[slotIndex];
+
+        if (cardInSlot) {
+            // --- This slot is FILLED ---
+            const { cardId, variant } = cardInSlot;
+            const cardData = allCardsData[cardId];
+            
+            // Make it look like a card
+            slot.innerHTML = ''; // Clear "Slot 1" text
+            slot.classList.add('filled');
+            
+            // Build the card HTML (a simplified version of the archive card)
+            const imgPath = getCardImagePath(cardId, variant);
+            slot.innerHTML = `
+                <div class="card-in-grid rarity-${cardData.rarity}">
+                    <div class="card-image-placeholder">
+                        <img src="${imgPath}" alt="${cardData.name}">
+                    </div>
+                    <div class="card-info">
+                        <span class="card-name">${cardData.name}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Add a click listener to REMOVE the card
+            slot.onclick = () => {
+                gameState.museum.slots[slotIndex] = null; // Empty the slot
+                saveState();
+                updateMuseumUI(); // Refresh the museum
+            };
+
+        } else {
+            // --- This slot is EMPTY ---
+            slot.innerHTML = `Slot ${slotIndex + 1}`;
+            slot.classList.remove('filled');
+            slot.onclick = null; // Remove the click listener
+        }
+    });
+}
+
 
 // --- 4. PACK OPENING LOGIC ---
 
