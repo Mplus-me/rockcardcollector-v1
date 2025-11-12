@@ -26,6 +26,7 @@ let allCardsData = {}; // Holds all card definitions from cards.json
 let allPacksData = {}; // Holds all pack drop rates from packs.json
 
 let isCardDragActive = false; // Flag to check if we're dragging a card
+let gameTickInterval = null; // Holds the timer that runs every second
 
 
 // --- 2. CORE GAME FUNCTIONS ---
@@ -49,6 +50,9 @@ async function initGame() {
     // Step 2: Load the player's save data (or create a new save).
     loadState();
 
+    // Check for offline expedition progress *before* drawing anything
+    checkAllExpeditions();
+
     // Step 3: Set up our navigation buttons.
     setupNavButtons();
 
@@ -56,7 +60,12 @@ async function initGame() {
     setupTestButtons();
 
     initMuseum(); // Initialize museum
+    initExpeditions(); // Initialize expeditions
+    
     updateUI(); // Draw the UI (like the archive) with the loaded data
+
+    // Start the 1-second game timer
+    gameTickInterval = setInterval(onGameTick, 1000);
     
     console.log("Game initialized successfully.");
     console.log("Current Game State:", gameState);
@@ -97,14 +106,46 @@ function saveState() {
 /**
  * Loads the player's save data from localStorage.
  * If no save exists, it creates a new, default game state.
+ * It also "patches" old saves with new properties if they are missing.
  */
 function loadState() {
     const savedState = localStorage.getItem('rockGameState');
+
+    // This is the default structure for expedition slots
+    const defaultExpeditions = [
+        { status: "empty" },
+        { status: "empty" },
+        { status: "empty" }
+    ];
 
     if (savedState) {
         // If we found a save, convert the string back into an object.
         gameState = JSON.parse(savedState);
         console.log("Loaded saved state:", gameState);
+
+        // --- PATCH FOR OLD SAVES ---
+        let needsSave = false; 
+
+        if (!gameState.museum) {
+            console.warn("Old save detected. Patching with 'museum' data.");
+            gameState.museum = {
+                background: 'bg-forest',
+                frame: 'frame-1',
+                slots: [null, null, null, null, null, null] 
+            };
+            needsSave = true;
+        }
+
+        if (!gameState.expeditions || !Array.isArray(gameState.expeditions)) {
+            console.warn("Old save detected. Patching with 'expeditions' data.");
+            gameState.expeditions = defaultExpeditions;
+            needsSave = true;
+        }
+
+        if (needsSave) {
+            saveState();
+        }
+
     } else {
         // If no save, create the default 'new game' object.
         gameState = {
@@ -114,20 +155,16 @@ function loadState() {
                 packsInventory: { basic: 5, standard: 1, premium: 0, curated: 0 }
             },
             inventory: {
-                cards: [] // Starts with an empty card inventory
+                cards: []
             },
-            expeditions: [], // No expeditions running
-
-            // Load museum
+            expeditions: defaultExpeditions, // Use the new default
             museum: {
-                background: 'bg-forest', // Placeholder name
-                frame: 'frame-1',        // Placeholder name
-                // An array to hold our 6 slots. 'null' means empty.
+                background: 'bg-forest',
+                frame: 'frame-1',
                 slots: [null, null, null, null, null, null] 
             }
         };
         console.log("No save found. Created new game state.");
-        // We save immediately so it's stored for next time.
         saveState();
     }
 }
@@ -198,6 +235,7 @@ function updateUI() {
     
     updateArchiveUI();
     updateMuseumUI();
+    updateExpeditionsUI();
     
     // Later, this will also call:
     // - updatePackCountUI()
@@ -563,3 +601,200 @@ function getCardImagePath(cardId, variant) {
 // This is the last line. It tells the browser to run our 'initGame'
 // function once the page and this script have finished loading.
 document.addEventListener('DOMContentLoaded', initGame);
+
+/*
+================================================================================
+SECTION 5: EXPEDITIONS & TIMERS
+================================================================================
+*/
+
+/**
+ * Runs once per second. Checks for completed expeditions and updates timers.
+ */
+function onGameTick() {
+    const now = Date.now();
+    let expeditionsNeedRedraw = false; // Flag to see if we need to call updateUI
+
+    gameState.expeditions.forEach((exp, index) => {
+        if (exp.status === "out") {
+            const timeLeft = exp.endTs - now;
+
+            if (timeLeft <= 0) {
+                // Expedition is done!
+                console.log(`Expedition ${index} finished.`);
+                exp.status = "complete";
+                exp.rewards = generateExpeditionRewards(exp.region);
+                expeditionsNeedRedraw = true; // We need to redraw the slot
+                saveState();
+            } else {
+                // Expedition is still running, update its timer display
+                const timerEl = document.getElementById(`exp-timer-${index}`);
+                if (timerEl) {
+                    timerEl.textContent = formatTime(timeLeft);
+                }
+            }
+        }
+    });
+
+    if (expeditionsNeedRedraw) {
+        updateExpeditionsUI(); // Redraw all slots
+    }
+}
+
+/**
+ * Checks all expeditions on game load to handle offline progress.
+ */
+function checkAllExpeditions() {
+    const now = Date.now();
+    gameState.expeditions.forEach((exp, index) => {
+        if (exp.status === "out" && now >= exp.endTs) {
+            // This expedition finished while the player was away
+            console.log(`Found completed offline expedition: ${index}`);
+            exp.status = "complete";
+            exp.rewards = generateExpeditionRewards(exp.region);
+        }
+    });
+    // Save any changes we made
+    saveState();
+}
+
+/**
+ * Creates the static HTML for the 3 expedition slots.
+ * Runs once on game load.
+ */
+function initExpeditions() {
+    const grid = document.getElementById('expedition-slots');
+    if (!grid) return;
+    
+    grid.innerHTML = ''; // Clear it
+
+    for (let i = 0; i < 3; i++) {
+        const slot = document.createElement('div');
+        slot.classList.add('expedition-slot');
+        slot.id = `exp-slot-${i}`; // Give each slot a unique ID
+        
+        // Add placeholder content. updateExpeditionsUI will fill it.
+        slot.innerHTML = `<h4>Slot ${i + 1}</h4>`; 
+        
+        grid.appendChild(slot);
+    }
+}
+
+/**
+ * Redraws the content of all expedition slots based on gameState.
+ */
+function updateExpeditionsUI() {
+    gameState.expeditions.forEach((exp, index) => {
+        const slot = document.getElementById(`exp-slot-${index}`);
+        if (!slot) return;
+
+        let content = '';
+        const regionName = "Riverbed"; // Placeholder
+        
+        switch (exp.status) {
+            case "empty":
+                content = `
+                    <h4>Slot ${index + 1} (Short)</h4>
+                    <p class="status">Ready to explore the ${regionName}.</p>
+                    <button class="game-button" onclick="startExpedition(${index})">Start (5m)</button>
+                `;
+                break;
+            
+            case "out":
+                content = `
+                    <h4>Slot ${index + 1} (Short)</h4>
+                    <p class="status">Exploring the ${regionName}...</p>
+                    <div class="timer" id="exp-timer-${index}">${formatTime(exp.endTs - Date.now())}</div>
+                    <button class="game-button" disabled>In Progress</button>
+                `;
+                break;
+                
+            case "complete":
+                const rewardCount = exp.rewards.length;
+                content = `
+                    <h4>Slot ${index + 1} (Short)</h4>
+                    <p class="status">Expedition complete! Found ${rewardCount} new card(s).</p>
+                    <button class="game-button claim-button" onclick="claimExpedition(${index})">Claim Reward</button>
+                `;
+                break;
+        }
+        slot.innerHTML = content;
+    });
+}
+
+/**
+ * Starts a new expedition.
+ * @param {number} slotIndex - The slot to start (0, 1, or 2)
+ */
+function startExpedition(slotIndex) {
+    const now = Date.now();
+    const duration = 5 * 60 * 1000; // 5 minutes
+    
+    gameState.expeditions[slotIndex] = {
+        status: "out",
+        region: "riverbed", // Hard-coded for now
+        endTs: now + duration
+    };
+    
+    saveState();
+    updateExpeditionsUI(); // Redraw the UI
+}
+
+/**
+ * Claims the rewards from a finished expedition.
+ * @param {number} slotIndex - The slot to claim (0, 1, or 2)
+ */
+function claimExpedition(slotIndex) {
+    const exp = gameState.expeditions[slotIndex];
+    if (exp.status !== "complete") return; // Safety check
+
+    // Add cards to inventory
+    addCardsToInventory(exp.rewards);
+    alert(`You found: ${exp.rewards.map(r => allCardsData[r.cardId].name).join(', ')}`);
+
+    // Reset the slot
+    gameState.expeditions[slotIndex] = { status: "empty" };
+    
+    saveState();
+    updateUI(); // Do a full UI update to refresh archive
+}
+
+/**
+ * Generates rewards for an expedition.
+ * @param {string} region - The region explored (e.g., "riverbed")
+ * @returns {Array<Object>} An array of card objects (e.g., [{cardId, variant}])
+ */
+function generateExpeditionRewards(region) {
+    // For now, just returns 1 random card from that region
+    
+    // Get all card IDs from that region
+    const validCardIds = Object.keys(allCardsData).filter(id => {
+        return allCardsData[id].region === region;
+    });
+
+    if (validCardIds.length === 0) {
+        console.warn(`No cards found for region: ${region}`);
+        return []; // Return empty if no cards match
+    }
+
+    // Pick a random card from the filtered list
+    const randomIndex = Math.floor(Math.random() * validCardIds.length);
+    const cardId = validCardIds[randomIndex];
+    
+    return [{ cardId: cardId, variant: "normal" }];
+}
+
+/**
+ * Helper function: Converts milliseconds into a 00:00 string.
+ * @param {number} ms - Milliseconds remaining
+ * @returns {string} - Formatted time string
+ */
+function formatTime(ms) {
+    if (ms < 0) ms = 0;
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    
+    // 'padStart' adds a leading '0' if the number is less than 10
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
