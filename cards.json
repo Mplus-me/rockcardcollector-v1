@@ -73,13 +73,13 @@
   },
   "rock-013": {
     "name": "Opal",
-    "rarity": "rare",
+    "rarity": "mythic",
     "region": "desert",
     "flavor": "Catches the light with a fiery, internal rainbow."
   },
   "rock-014": {
-    "name": "Meteorite Fragment",
-    "rarity": "rare",
+    "name": "Meteorite",
+    "rarity": "mythic",
     "region": "cosmic",
     "flavor": "A visitor from the stars. Feels heavy."
   },
@@ -126,7 +126,7 @@
     "flavor": "A bright green gem born in fire."
   },
   "rock-022": {
-    "name":"Malachite",
+    "name": "Malachite",
     "rarity": "uncommon",
     "region": "cave",
     "flavor": "Forms in beautiful, swirling green patterns."
@@ -139,7 +139,7 @@
   },
   "rock-024": {
     "name": "Moonstone",
-    "rarity": "rare",
+    "rarity": "mythic",
     "region": "grassland",
     "flavor": "Shines with a soft, pearly, blueish light."
   },
@@ -169,13 +169,13 @@
   },
   "rock-029": {
     "name": "Diamond (Raw)",
-    "rarity": "rare",
+    "rarity": "legendary",
     "region": "cave",
     "flavor": "The hardest natural substance known."
   },
   "rock-030": {
     "name": "Rainbow Obsidian",
-    "rarity": "rare",
+    "rarity": "legendary",
     "region": "volcanic",
     "flavor": "An obsidian variant that reveals colored layers."
   }
