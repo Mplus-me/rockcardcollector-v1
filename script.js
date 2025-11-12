@@ -262,6 +262,73 @@ function handleCardDragStart(event) {
     }, { once: true }); // 'once: true' automatically removes this listener
 }
 
+/**
+ * Creates the museum slots and adds their event listeners.
+ * Runs once at game initialization.
+ */
+function initMuseum() {
+    const grid = document.getElementById('museum-grid');
+    if (!grid) return;
+
+    grid.innerHTML = ''; // Clear it first
+
+    // Create the 6 slots
+    for (let i = 0; i < 6; i++) {
+        const slot = document.createElement('div');
+        slot.classList.add('museum-slot');
+        slot.dataset.slotIndex = i; // Store the slot's index (0-5)
+        slot.innerHTML = `Slot ${i + 1}`; // Placeholder text
+
+        // Add drop zone event listeners
+        slot.addEventListener('dragover', handleMuseumDragOver);
+        slot.addEventListener('dragleave', handleMuseumDragLeave);
+        slot.addEventListener('drop', handleMuseumDrop);
+
+        grid.appendChild(slot);
+    }
+}
+
+/**
+ * Handles 'dragover' on a museum slot.
+ * @param {DragEvent} event
+ */
+function handleMuseumDragOver(event) {
+    event.preventDefault(); // This is *required* to allow a drop
+    event.dataTransfer.dropEffect = 'copy';
+    this.classList.add('drag-over'); // Add visual feedback
+}
+
+/**
+ * Handles 'dragleave' on a museum slot.
+ * @param {DragEvent} event
+ */
+function handleMuseumDragLeave(event) {
+    this.classList.remove('drag-over'); // Remove visual feedback
+}
+
+/**
+ * Handles the 'drop' event on a museum slot.
+ * @param {DragEvent} event
+ */
+function handleMuseumDrop(event) {
+    event.preventDefault();
+    this.classList.remove('drag-over');
+
+    // Get the card data we stored in 'dragstart'
+    const data = JSON.parse(event.dataTransfer.getData('text/plain'));
+    const { cardId, variant } = data;
+
+    // Get the slot index we stored on the slot element
+    const slotIndex = parseInt(this.dataset.slotIndex);
+
+    // Update the game state
+    gameState.museum.slots[slotIndex] = { cardId, variant };
+
+    // Save and refresh the UI
+    saveState();
+    updateMuseumUI();
+}
+
 
 // --- 4. PACK OPENING LOGIC ---
 
