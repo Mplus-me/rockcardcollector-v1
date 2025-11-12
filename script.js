@@ -25,6 +25,8 @@ let gameState = {}; // Holds the player's save data (packs, cards, etc.)
 let allCardsData = {}; // Holds all card definitions from cards.json
 let allPacksData = {}; // Holds all pack drop rates from packs.json
 
+let isCardDragActive = false; // Flag to check if we're dragging a card
+
 
 // --- 2. CORE GAME FUNCTIONS ---
 
@@ -135,18 +137,34 @@ function loadState() {
 
 /**
  * Finds all navigation buttons and makes them clickable.
+ * Also adds listeners to switch panels during a card drag.
  */
 function setupNavButtons() {
     // Get all elements with the class 'nav-button'
     const buttons = document.querySelectorAll('.nav-button');
 
-    // Loop over each button and add a 'click' event listener
+    // Loop over each button and add event listeners
     buttons.forEach(button => {
+        
+        // 1. The original click listener
         button.addEventListener('click', () => {
             // 'dataset.panel' gets the 'data-panel' attribute from the HTML
-            // e.g., <img ... data-panel="archive-panel">
             const panelId = button.dataset.panel;
             showPanel(panelId);
+        });
+
+        // 2. NEW: The 'dragover' listener
+        // This fires when you drag something *over* the button
+        button.addEventListener('dragover', (event) => {
+            // Check our flag: only proceed if we're dragging a card
+            if (isCardDragActive) {
+                // This is required to allow 'drop' events
+                event.preventDefault(); 
+                
+                // Get the panel ID and switch to it
+                const panelId = button.dataset.panel;
+                showPanel(panelId);
+            }
         });
     });
 }
@@ -253,12 +271,19 @@ function handleCardDragStart(event) {
     event.dataTransfer.setData('text/plain', JSON.stringify({ cardId, variant }));
     event.dataTransfer.effectAllowed = 'copy';
 
+    // ADD THIS: Set the global flag to true
+    isCardDragActive = true;
+
     // Add a class for styling
     this.classList.add('dragging');
 
     // Remove the class when the drag ends (whether it was dropped or not)
     this.addEventListener('dragend', () => {
         this.classList.remove('dragging');
+        
+        // ADD THIS: Reset the flag when the drag is over
+        isCardDragActive = false;
+        
     }, { once: true }); // 'once: true' automatically removes this listener
 }
 
