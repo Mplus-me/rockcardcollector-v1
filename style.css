@@ -672,3 +672,76 @@ h1, h2 {
         gap: 10px;
     }
 }
+
+/* --- 18. Minigame Hub Styles --- */
+
+/* This is the grid of buttons */
+.minigame-grid {
+    display: grid;
+    /* This creates a responsive grid of 140px buttons */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Style for the big game-selection buttons */
+.minigame-button {
+    background-color: #F4F1DE; /* Light parchment */
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-family: 'Verdana', sans-serif;
+    font-size: 14px;
+    color: #3D405B;
+    font-weight: bold;
+}
+.minigame-button:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+}
+.minigame-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background-color: #E0DAB9;
+}
+
+/* Placeholder icon inside the button */
+.minigame-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #C9C1A5;
+    border: 2px dashed #bcae88;
+    border-radius: 5px;
+    margin: 0 auto 10px auto;
+    display: block;
+    overflow: hidden;
+}
+
+/* --- Hub Show/Hide Logic --- */
+
+/* Hide all game stages by default */
+#minigame-stages { display: none; }
+
+/* We re-use this class but now it's a child of #minigame-stages */
+.minigame-container { 
+    display: none; /* Hide all individual games */
+    background-color: #F4F1DE;
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+/* This class will be added by JS to show the *active* game */
+.minigame-container.active-minigame { 
+    display: block; 
+}
+
+/* Style for the "Back" button */
+#minigame-back-btn {
+    margin-bottom: 15px;
+}
