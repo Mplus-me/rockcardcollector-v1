@@ -115,7 +115,7 @@
                                 <span>Cozy Fishing</span>
                             </button>
                             
-                            <button class="minigame-button" data-game="sifting" disabled>
+                            <button class="minigame-button" data-game="sifting">
                                 <img src="images/ui/game-sifting.png" class="minigame-icon" alt="">
                                 <span>Rock Sifting (Soon)</span>
                             </button>
@@ -158,7 +158,22 @@
                         
                         <div id="sifting-minigame" class="minigame-container">
                             <h4>Rock Sifting</h4>
-                            <p>(Coming soon...)</p>
+                            
+                            <div id="sifting-start-area">
+                                <p>Find the 3 rocks in the list before time runs out! Click to start.</p>
+                                <button class="game-button" onclick="startSiftingGame()">Start Sifting</button>
+                            </div>
+                            
+                            <div id="sifting-game-area" style="display: none;">
+                                <div class="sifting-hud">
+                                    <ul id="sifting-find-list">
+                                        </ul>
+                                    <div id="sifting-timer">Time: 20s</div>
+                                </div>
+                                <div id="sifting-sieve">
+                                    </div>
+                                <div id="sifting-status" class="status"></div>
+                            </div>
                         </div>
 
                         </div>
