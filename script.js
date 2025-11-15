@@ -201,6 +201,7 @@ async function initGame() {
     initConverter(); // Initialize duplicate converter
     initArchiveSorter(); // Initialize Archive Sorter
     initPackModal(); // Initialize Pack Modal
+    initDeleteButton(); // Intialize Delete Button
     
     updateUI(); // Draw the UI (like the archive) with the loaded data
 
@@ -329,6 +330,29 @@ function loadState() {
         };
         console.log("No save found. Created new game state.");
         saveState();
+    }
+}
+
+/**
+ * Sets up the "Delete Save" button.
+ */
+function initDeleteButton() {
+    const deleteBtn = document.getElementById('delete-save-button');
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+            // Show a confirmation popup first
+            const didConfirm = window.confirm(
+                "Are you sure you want to delete everything?\n\nThis cannot be undone and will restart your game."
+            );
+            
+            if (didConfirm) {
+                // User clicked "OK"
+                console.log("Deleting save data...");
+                localStorage.removeItem('rockGameState');
+                // Reload the page to force a fresh start
+                window.location.reload();
+            }
+        });
     }
 }
 
