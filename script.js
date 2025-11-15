@@ -104,6 +104,23 @@ const WILD_RARITY_CHANCE = [
     { rarity: "common", chance: 70 }      // (Cumulative: 100%)
 ];
 
+// NEW: Progression goals for variants
+const UNLOCK_GOALS = {
+    FOIL: { type: "packs", value: 50 },
+    ALT_ART_1: { type: "unique", value: 100 },
+    ALT_ART_2: { type: "unique", value: 200 }
+};
+
+// NEW: Pull rates for variants
+const VARIANT_RATES = {
+    FOIL_CHANCE: 1, // 1%
+    ART_CHANCES: { // Percentages for [base, alt1, alt2]
+        LOCKED: [100, 0, 0],
+        ALT_1_UNLOCKED: [99, 1, 0], // 99% base, 1% alt1
+        ALT_2_UNLOCKED: [98, 1, 1]  // 98% base, 1% alt1, 1% alt2
+    }
+};
+
 // The subset of rocks used in minigames
 const MINIGAME_ROCK_LIST = [
     'rock-001', // River Pebble
@@ -231,12 +248,11 @@ function saveState() {
 /**
  * Loads the player's save data from localStorage.
  * If no save exists, it creates a new, default game state.
- * It also "patches" old saves with new properties if they are missing.
  */
 function loadState() {
     const savedState = localStorage.getItem('rockGameState');
 
-    // This is the default structure for expedition slots
+    // Default structure for expedition slots
     const defaultExpeditions = [
         { status: "empty" },
         { status: "empty" },
@@ -244,15 +260,16 @@ function loadState() {
     ];
 
     if (savedState) {
-        // If we found a save, convert the string back into an object.
         gameState = JSON.parse(savedState);
         console.log("Loaded saved state:", gameState);
 
-        // --- PATCH FOR OLD SAVES ---
+        // --- PATCHING ---
+        // (We are *not* migrating old card data, per user request)
+        // But we will still patch for core systems just in case.
         let needsSave = false; 
 
         if (!gameState.museum) {
-            console.warn("Old save detected. Patching with 'museum' data.");
+            console.warn("Patching with 'museum' data.");
             gameState.museum = {
                 background: 'bg-forest',
                 frame: 'frame-1',
@@ -262,10 +279,25 @@ function loadState() {
         }
 
         if (!gameState.expeditions || !Array.isArray(gameState.expeditions)) {
-            console.warn("Old save detected. Patching with 'expeditions' data.");
+            console.warn("Patching with 'expeditions' data.");
             gameState.expeditions = defaultExpeditions;
             needsSave = true;
         }
+        
+        // This is a good time to ensure all new packs are in the inventory
+        const defaultPackKeys = ["basic", "explorer", "advanced", "deluxe", "collector"];
+        if (!gameState.player.packsInventory) {
+             gameState.player.packsInventory = {};
+             needsSave = true;
+        }
+        defaultPackKeys.forEach(key => {
+            if (!gameState.player.packsInventory.hasOwnProperty(key)) {
+                console.warn(`Patching packsInventory with '${key}'`);
+                gameState.player.packsInventory[key] = 0;
+                needsSave = true;
+            }
+        });
+
 
         if (needsSave) {
             saveState();
@@ -277,12 +309,18 @@ function loadState() {
             player: {
                 packsOpened: 0,
                 uniquesOwned: 0,
-                packsInventory: { basic: 3, explorer: 1, advanced: 0, deluxe: 0, collector: 0 }
+                packsInventory: { 
+                    basic: 5, 
+                    explorer: 0,
+                    advanced: 0,
+                    deluxe: 0,
+                    collector: 0
+                }
             },
             inventory: {
-                cards: []
+                cards: [] // NEW: Will be populated with {cardId, art, foil, count}
             },
-            expeditions: defaultExpeditions, // Use the new default
+            expeditions: defaultExpeditions,
             museum: {
                 background: 'bg-forest',
                 frame: 'frame-1',
@@ -515,26 +553,19 @@ function updateArchiveUI() {
 function handleCardDragStart(event) {
     // 'this' refers to the cardElement we're dragging
     const cardId = this.dataset.cardId;
-    const variant = this.dataset.variant;
+    const art = parseInt(this.dataset.art, 10); // NEW
+    const foil = this.dataset.foil;           // NEW
 
-    // Store the card's data for the 'drop' event
-    event.dataTransfer.setData('text/plain', JSON.stringify({ cardId, variant }));
+    // Store all data for the 'drop' event
+    event.dataTransfer.setData('text/plain', JSON.stringify({ cardId, art, foil }));
     event.dataTransfer.effectAllowed = 'copy';
-
-    // ADD THIS: Set the global flag to true
     isCardDragActive = true;
-
-    // Add a class for styling
     this.classList.add('dragging');
 
-    // Remove the class when the drag ends (whether it was dropped or not)
     this.addEventListener('dragend', () => {
         this.classList.remove('dragging');
-        
-        // ADD THIS: Reset the flag when the drag is over
         isCardDragActive = false;
-        
-    }, { once: true }); // 'once: true' automatically removes this listener
+    }, { once: true });
 }
 
 /**
@@ -604,15 +635,15 @@ function handleMuseumDrop(event) {
     event.preventDefault();
     this.classList.remove('drag-over');
 
-    // Get the card data we stored in 'dragstart'
+    // Get the full card data we stored in 'dragstart'
     const data = JSON.parse(event.dataTransfer.getData('text/plain'));
-    const { cardId, variant } = data;
+    const { cardId, art, foil } = data; // NEW
 
-    // Get the slot index we stored on the slot element
+    // Get the slot index
     const slotIndex = parseInt(this.dataset.slotIndex);
 
-    // Update the game state
-    gameState.museum.slots[slotIndex] = { cardId, variant };
+    // Update the game state with the full card object
+    gameState.museum.slots[slotIndex] = { cardId, art, foil };
 
     // Save and refresh the UI
     saveState();
@@ -1028,50 +1059,56 @@ function getRandomCardOfRegion(region) {
 
 /**
  * Helper function: Adds an array of new cards to the player's inventory.
- * This function now correctly stacks duplicates.
- * @param {Array<Object>} newCards - e.g., [{cardId: "rock-001", variant: "normal"}]
+ * This function now correctly stacks duplicates based on cardId, art, AND foil.
+ * @param {Array<Object>} newCards - e.g., [{cardId: "rock-001", art: 0, foil: "normal"}]
  */
 function addCardsToInventory(newCards) {
     const inventory = gameState.inventory.cards;
 
     newCards.forEach(newCard => {
-        // Check if this exact card (id AND variant) is already in our inventory
+        // Check if this exact card (id, art, AND foil) is already in our inventory
         const existingCard = inventory.find(card => 
-            card.cardId === newCard.cardId && card.variant === newCard.variant
+            card.cardId === newCard.cardId && 
+            card.art === newCard.art &&
+            card.foil === newCard.foil
         );
 
         if (existingCard) {
             // If it exists, just increment the count
             existingCard.count += 1;
-            console.log(`Stacked duplicate: ${newCard.cardId} (${newCard.variant})`);
+            console.log(`Stacked duplicate: ${newCard.cardId} (Art: ${newCard.art}, Foil: ${newCard.foil})`);
         } else {
             // If it's new, add it to the inventory with a count of 1
             inventory.push({
                 cardId: newCard.cardId,
-                variant: newCard.variant,
+                art: newCard.art,
+                foil: newCard.foil,
                 count: 1
             });
-            console.log(`Added new card: ${newCard.cardId} (${newCard.variant})`);
+            console.log(`Added new card: ${newCard.cardId} (Art: ${newCard.art}, Foil: ${newCard.foil})`);
         }
     });
     
-    // We will update uniquesOwned count here later
+    // Recalculate uniques owned (this is fast enough)
+    gameState.player.uniquesOwned = getUniqueCardCount();
 }
 
 /**
- * Gets the correct image path for a card based on its ID and variant.
+ * Gets the correct image path for a card based on its ID and art variant.
  * @param {string} cardId - The ID of the card (e.g., "rock-001")
- * @param {string} variant - The variant ("normal", "foil", "alt")
+ * @param {number} artVariant - The art variant (0, 1, or 2)
  * @returns {string} - The relative path to the image
  */
-function getCardImagePath(cardId, variant) {
-    // For now, this is simple.
-    // In the future, we'll add logic here to handle "alt" variants
-    // (e.g., if variant === 'alt', return `images/cards/${cardId}-alt.png`)
-    
-    // All cards, regardless of variant, use the base image path for now.
-    // The "foil" effect will be a CSS overlay we add later.
-    return `images/cards/${cardId}.png`;
+function getCardImagePath(cardId, artVariant) {
+    if (artVariant === 0) {
+        // Base Art
+        return `images/cards/${cardId}.png`;
+    } else {
+        // Alt Art
+        return `images/cards/${cardId}-alt${artVariant}.png`;
+    }
+    // Note: 'foil' does not affect the image path.
+    // It will be a CSS overlay added later.
 }
 
 /**
@@ -1870,6 +1907,7 @@ function clearConverterSelection() {
 
 /**
  * Redraws the grid of duplicate cards.
+ * Now handles art/foil variants as separate items.
  */
 function updateConverterUI() {
     const grid = document.getElementById('converter-grid');
@@ -1886,39 +1924,41 @@ function updateConverterUI() {
 
         // Check if this card is in our current selection
         const selectedEntry = conversionSelection.find(c => 
-            c.cardId === card.cardId && c.variant === card.variant
+            c.cardId === card.cardId && 
+            c.art === card.art &&
+            c.foil === card.foil
         );
         
-        // This is the card element in the grid
         const cardElement = document.createElement('div');
         cardElement.classList.add('card-in-grid');
         cardElement.classList.add(`rarity-${cardData.rarity}`);
+        
+        // We'll add a visual 'foil' class here in Step 2
         
         if (selectedEntry) {
             cardElement.classList.add('selected'); // Highlight if selected
         }
 
-        // Get the image path
-        const imgPath = getCardImagePath(card.cardId, card.variant);
-
-        // How many are available to convert (total count - 1)
+        const imgPath = getCardImagePath(card.cardId, card.art);
         const availableCount = card.count - 1;
-        // How many are *currently* selected
         const selectedCount = selectedEntry ? selectedEntry.count : 0;
 
+        // We'll add (Foil) or (Alt) to the name in Step 2
+        let displayName = cardData.name; 
+        
         cardElement.innerHTML = `
             <div class="card-image-placeholder">
-                <img src="${imgPath}" alt="${cardData.name}">
+                <img src="${imgPath}" alt="${displayName}">
             </div>
             <div class="card-info">
-                <span class="card-name">${cardData.name}</span>
+                <span class="card-name">${displayName}</span>
                 <span class="card-count">x(${selectedCount}/${availableCount})</span>
             </div>
         `;
         
-        // Add click listener to select/deselect this card
+        // Add click listener
         cardElement.addEventListener('click', () => {
-            toggleCardForConversion(card.cardId, card.variant);
+            toggleCardForConversion(card.cardId, card.art, card.foil);
         });
         
         grid.appendChild(cardElement);
@@ -1932,38 +1972,39 @@ function updateConverterUI() {
  * Called when a card in the converter grid is clicked.
  * Adds/removes one copy of the card to the selection.
  * @param {string} cardId
- * @param {string} variant
+ * @param {number} art
+ * @param {string} foil
  */
-function toggleCardForConversion(cardId, variant) {
+function toggleCardForConversion(cardId, art, foil) {
     const playerCard = gameState.inventory.cards.find(c => 
-        c.cardId === cardId && c.variant === variant
+        c.cardId === cardId && 
+        c.art === art &&
+        c.foil === foil
     );
-    if (!playerCard) return; // Should never happen
+    if (!playerCard) return;
 
     const availableCount = playerCard.count - 1;
-    if (availableCount <= 0) return; // No duplicates to select
+    if (availableCount <= 0) return;
 
     let selectionEntry = conversionSelection.find(c => 
-        c.cardId === cardId && c.variant === variant
+        c.cardId === cardId && 
+        c.art === art &&
+        c.foil === foil
     );
 
     if (!selectionEntry) {
         // Not in selection yet, add 1
-        conversionSelection.push({ cardId, variant, count: 1 });
+        conversionSelection.push({ cardId, art, foil, count: 1 });
     } else {
-        // Already in selection, increment count
         if (selectionEntry.count < availableCount) {
-            // We can add more
             selectionEntry.count += 1;
         } else {
             // We've selected all available copies, so clicking again removes it
             selectionEntry.count = 0;
-            // Remove from array if count is 0
             conversionSelection = conversionSelection.filter(c => c.count > 0);
         }
     }
     
-    // Redraw the entire converter UI to show new counts
     updateConverterUI();
 }
 
@@ -2004,7 +2045,7 @@ function confirmConversion() {
     let totalPoints = 0;
     let finalReward = null;
 
-    // 1. Calculate points and reward (again, as a safety check)
+    // 1. Calculate points
     conversionSelection.forEach(card => {
         const cardData = allCardsData[card.cardId];
         const pointsPerCard = CONVERSION_POINTS[cardData.rarity] || 0;
@@ -2013,12 +2054,12 @@ function confirmConversion() {
 
     for (const pack of PACK_THRESHOLDS) {
         if (totalPoints >= pack.points) {
-            finalReward = pack.name; // Just the name, e.g., "basic"
+            finalReward = pack.name;
             break;
         }
     }
 
-    // 2. Safety check: If no reward, stop.
+    // 2. Safety check
     if (!finalReward) {
         console.warn("Conversion confirmed with no reward. Aborting.");
         return;
@@ -2027,13 +2068,12 @@ function confirmConversion() {
     // 3. Remove the selected cards from inventory
     conversionSelection.forEach(selectedCard => {
         const playerCard = gameState.inventory.cards.find(c =>
-            c.cardId === selectedCard.cardId && c.variant === selectedCard.variant
+            c.cardId === selectedCard.cardId && 
+            c.art === selectedCard.art &&
+            c.foil === selectedCard.foil
         );
         if (playerCard) {
             playerCard.count -= selectedCard.count;
-            // Note: We don't remove the card if count hits 0,
-            // because this logic only selects from cards where count > 1,
-            // so the count will always be at least 1 after subtraction.
         }
     });
 
@@ -2048,7 +2088,7 @@ function confirmConversion() {
     
     // 7. Save and refresh everything
     saveState();
-    updateUI(); // This will refresh the converter grid *and* pack counts
+    updateUI(); 
 }
 
 
