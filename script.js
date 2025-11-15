@@ -141,6 +141,7 @@ let currentArchiveSort = 'name-asc'; // Default to A-Z
 
 let allCardsData = {}; // Holds all card definitions from cards.json
 let allPacksData = {}; // Holds all pack drop rates from packs.json
+let allRegionsData = {}; // Holds all region unlock data from regions.json
 
 let isCardDragActive = false; // Flag to check if we're dragging a card
 let gameTickInterval = null; // Holds the timer that runs every second
@@ -195,24 +196,26 @@ async function initGame() {
 }
 
 /**
- * Fetches cards.json and packs.json and stores them in our global variables.
- * Uses the 'fetch' API, which is a modern JavaScript way to get files.
+ * Fetches cards.json, packs.json, and regions.json
+ * and stores them in our global variables.
  */
 async function loadMasterData() {
-    // 'Promise.all' lets us load both files at the same time.
-    const [cardsResponse, packsResponse] = await Promise.all([
+    // 'Promise.all' lets us load all files at the same time.
+    const [cardsResponse, packsResponse, regionsResponse] = await Promise.all([
         fetch('cards.json'),
-        fetch('packs.json')
+        fetch('packs.json'),
+        fetch('regions.json') // Added the new file
     ]);
 
     // Check if the files were actually found.
-    if (!cardsResponse.ok || !packsResponse.ok) {
+    if (!cardsResponse.ok || !packsResponse.ok || !regionsResponse.ok) {
         throw new Error("Network response was not ok.");
     }
 
-    // '.json()' reads the file contents and converts them into a JavaScript object.
+    // '.json()' reads the file contents and converts them
     allCardsData = await cardsResponse.json();
     allPacksData = await packsResponse.json();
+    allRegionsData = await regionsResponse.json(); // Added the new file
 }
 
 /**
@@ -305,6 +308,31 @@ function getUniqueCardCount() {
     });
     
     return uniqueIds.size;
+}
+
+/**
+ * Gets a list of all region IDs that the player has unlocked.
+ * @returns {Array<string>} - e.g., ['riverbed', 'grassland', 'coast']
+ */
+function getUnlockedRegions() {
+    const unlocked = [];
+    const packs = gameState.player.packsOpened;
+    const uniques = getUniqueCardCount(); // Use our existing helper!
+
+    // Loop through all regions in our loaded data
+    for (const regionId in allRegionsData) {
+        const region = allRegionsData[regionId];
+        const unlock = region.unlock;
+
+        // Check if the unlock condition is met
+        if (unlock.type === 'packs' && packs >= unlock.value) {
+            unlocked.push(regionId);
+        } else if (unlock.type === 'unique' && uniques >= unlock.value) {
+            unlocked.push(regionId);
+        }
+    }
+    
+    return unlocked;
 }
 
 
@@ -892,16 +920,66 @@ function getRandomCardOfRarity(rarity) {
     // Pick a random card from the filtered list
     const randomIndex = Math.floor(Math.random() * validCardIds.length);
     return validCardIds[randomIndex];
+}/**
+ * Helper function: Gets a random card ID that matches a specific rarity
+ * AND is from a region the player has unlocked.
+ * @param {string} rarity - The rarity to filter by
+ * @returns {string} - The chosen card ID (e.g., "rock-011")
+ */
+function getRandomCardOfRarity(rarity) {
+    // 1. Get the list of regions the player has access to
+    const unlockedRegions = getUnlockedRegions();
+    
+    // 2. Get all card IDs from our loaded data
+    const allCardIds = Object.keys(allCardsData);
+
+    // 3. Filter that list
+    const validCardIds = allCardIds.filter(id => {
+        const card = allCardsData[id];
+        return card.rarity === rarity && // A) Card has the right rarity
+               unlockedRegions.includes(card.region); // B) Card is in an unlocked region
+    });
+    
+    if (validCardIds.length === 0) {
+        // --- Failsafe ---
+        // This can happen if a player gets (e.g.) a "Rare" from a basic
+        // pack, but has not unlocked any regions that *have* rare cards.
+        // We'll fall back to *any* unlocked common card.
+        console.warn(`No cards found for rarity ${rarity} in unlocked regions. Giving a common card.`);
+        
+        const commonCards = allCardIds.filter(id => {
+            const card = allCardsData[id];
+            return card.rarity === 'common' && unlockedRegions.includes(card.region);
+        });
+        
+        // This should always find a card, as 'riverbed' (full of commons) is
+        // unlocked at 0 packs.
+        const randomIndex = Math.floor(Math.random() * commonCards.length);
+        return commonCards[randomIndex];
+    }
+
+    // 4. Pick a random card from the filtered list
+    const randomIndex = Math.floor(Math.random() * validCardIds.length);
+    return validCardIds[randomIndex];
 }
 
 /**
  * Helper function: Gets a random card ID matching a region AND a rarity.
  * This is used for "wild" card finds, like from fishing.
+ * This function now ALSO respects region unlocks.
  * @param {string} region - The region to filter by (e.g., "riverbed")
  * @returns {string | null} - The chosen card ID (e.g., "rock-001"), or null
  */
 function getRandomCardOfRegion(region) {
-    // --- Step 1: Determine the Rarity ---
+    // --- Step 1: Check if the player has even unlocked this region ---
+    const unlockedRegions = getUnlockedRegions();
+    if (!unlockedRegions.includes(region)) {
+        console.warn(`Attempted to get card from locked region: ${region}.`);
+        // Failsafe: return a card from their *first* unlocked region instead
+        region = unlockedRegions[0] || 'riverbed';
+    }
+
+    // --- Step 2: Determine the Rarity (using our existing table) ---
     const roll = Math.random() * 100;
     let cumulativeChance = 0;
     let chosenRarity = "common"; // Default
@@ -914,11 +992,14 @@ function getRandomCardOfRegion(region) {
         }
     }
 
-    // --- Step 2: Find a card that matches BOTH region AND rarity ---
+    // --- Step 3: Find a card that matches region, rarity, AND is unlocked ---
     const allCardIds = Object.keys(allCardsData);
     const validCardIds = allCardIds.filter(id => {
-        return allCardsData[id].region === region &&
-               allCardsData[id].rarity === chosenRarity;
+        const card = allCardsData[id];
+        return card.region === region &&
+               card.rarity === chosenRarity;
+        // We don't need to check unlock status *again* because we
+        // already filtered the region in Step 1.
     });
 
     if (validCardIds.length > 0) {
@@ -926,18 +1007,19 @@ function getRandomCardOfRegion(region) {
         const randomIndex = Math.floor(Math.random() * validCardIds.length);
         return validCardIds[randomIndex];
     } else {
-        // --- Step 3: Failsafe ---
+        // --- Step 4: Failsafe ---
         // What if no "common" "riverbed" card exists?
-        // Fall back to *any* card from that region, so the player still gets something.
+        // Fall back to *any* card from that region.
         console.warn(`No card found for ${chosenRarity} in ${region}. Falling back to any.`);
         
-        const anyRegionCardIds = allCardIds.filter(id => allCardsData[id].region === region);
+        const anyRegionCardIds = allCardIds.filter(id => {
+            return allCardsData[id].region === region;
+        });
         
         if (anyRegionCardIds.length > 0) {
             const randomIndex = Math.floor(Math.random() * anyRegionCardIds.length);
             return anyRegionCardIds[randomIndex];
         } else {
-            // Absolute failsafe, should never happen
             console.error(`No cards found for region: ${region}`);
             return null;
         }
