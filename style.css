@@ -526,7 +526,7 @@ h1, h2 {
     so the new fixed nav bar won't hide the content underneath it.
     */
     body {
-        padding-bottom: 70px;
+        padding-bottom: 100px;
     }
 
     /* We turn off the desktop's "flex-direction: row"
@@ -975,4 +975,20 @@ h1, h2 {
     font-style: italic;
     color: #D95525; /* Rust */
     margin-left: 5px;
+}
+
+/* New style for destructive buttons */
+.game-button.danger-button {
+    background-color: #e74c3c; /* A strong red */
+}
+.game-button.danger-button:hover {
+    background-color: #c0392b; /* A darker red */
+}
+
+/* Container for the delete button */
+.delete-save-container {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px dashed #C9C1A5;
+    text-align: center;
 }
