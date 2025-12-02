@@ -1835,7 +1835,7 @@ function drawSiftingSieve() {
         const cardData = allCardsData[rockId];
         const rockEl = document.createElement('img');
         
-        rockEl.src = getCardImagePath(rockId, 'normal');
+        rockEl.src = getCardImagePath(rockId, 0);
         rockEl.alt = cardData.name;
         rockEl.classList.add('sieve-rock');
         rockEl.dataset.rockId = rockId; // Store the ID
