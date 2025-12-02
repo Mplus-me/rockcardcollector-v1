@@ -1198,19 +1198,18 @@ function addCardsToInventory(newCards) {
 /**
  * Gets the correct image path for a card based on its ID and art variant.
  * @param {string} cardId - The ID of the card (e.g., "rock-001")
- * @param {number} artVariant - The art variant (0, 1, or 2)
+ * @param {number|string} artVariant - The art variant (0, 1, 2, or "normal")
  * @returns {string} - The relative path to the image
  */
 function getCardImagePath(cardId, artVariant) {
-    if (artVariant === 0) {
-        // Base Art
+    // Safety check: Treat 0, "0", undefined, or "normal" as the Base Art
+    if (!artVariant || artVariant === 0 || artVariant === '0' || artVariant === 'normal') {
+        // Base Art -> rock-037.png
         return `images/cards/${cardId}.png`;
     } else {
-        // Alt Art
+        // Alt Art -> rock-037-alt1.png
         return `images/cards/${cardId}-alt${artVariant}.png`;
     }
-    // Note: 'foil' does not affect the image path.
-    // It will be a CSS overlay added later.
 }
 
 /**
