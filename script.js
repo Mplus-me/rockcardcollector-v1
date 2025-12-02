@@ -123,17 +123,17 @@ const VARIANT_RATES = {
 
 // The subset of rocks used in minigames
 const MINIGAME_ROCK_LIST = [
-    'rock-001', // River Pebble
-    'rock-002', // Sharp Flint
-    'rock-007', // Small Geode
-    'rock-008', // Obsidian
-    'rock-009', // Rose Quartz
-    'rock-010', // Pyrite
-    'rock-011', // Amethyst
-    'rock-019', // Turquoise
-    'rock-020', // Garnet
-    'rock-021', // Peridot
-    'rock-022', // Malachite
+    'rock-001', // River Pebble FIXIT
+    'rock-002', // Sharp Flint FIXIT
+    'rock-021', // Small Geode
+    'rock-022', // Obsidian
+    'rock-009', // Rose Quartz FIXIT
+    'rock-010', // Pyrite FIXIT
+    'rock-041', // Amethyst
+    'rock-026', // Turquoise FIXIT
+    'rock-020', // Garnet FIXIT
+    'rock-161', // Sulphur
+    'rock-179', // Snowflake Obsidian
     'rock-025'  // Petrified Wood
 ];
 
@@ -202,6 +202,7 @@ async function initGame() {
     initArchiveSorter(); // Initialize Archive Sorter
     initPackModal(); // Initialize Pack Modal
     initDeleteButton(); // Intialize Delete Button
+    initDevTools(); // Initialize DevTools
     
     updateUI(); // Draw the UI (like the archive) with the loaded data
 
@@ -2190,6 +2191,92 @@ function confirmConversion() {
     updateUI(); 
 }
 
+/*
+================================================================================
+SECTION 8: DEV TOOLS
+================================================================================
+*/
+
+/**
+ * Initializes the DevTools panel (populates dropdowns).
+ */
+function initDevTools() {
+    const packSelect = document.getElementById('dev-pack-select');
+    if (!packSelect) return;
+
+    // Clear existing
+    packSelect.innerHTML = '';
+
+    // Automatically find all pack types from our data
+    // This is great because if you add "seasonal" to packs.json, it shows up here automatically!
+    const packTypes = Object.keys(allPacksData);
+    
+    packTypes.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type;
+        option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        packSelect.appendChild(option);
+    });
+}
+
+/**
+ * Cheat: Adds packs.
+ * @param {number} amount 
+ */
+function devAddPacks(amount) {
+    const select = document.getElementById('dev-pack-select');
+    const type = select.value;
+    
+    addPackToInventory(type, amount);
+    // Don't alert() because that gets annoying when clicking +100
+    console.log(`Dev: Added ${amount} ${type} packs.`);
+}
+
+/**
+ * Cheat: Spawns a specific card.
+ */
+function devAddCard() {
+    const input = document.getElementById('dev-card-input');
+    const status = document.getElementById('dev-card-status');
+    const cardId = input.value.trim();
+
+    if (!allCardsData[cardId]) {
+        status.textContent = `Error: Card ID "${cardId}" not found.`;
+        status.style.color = "red";
+        return;
+    }
+
+    // Add 1 Normal Base version
+    addCardsToInventory([{ cardId: cardId, art: 0, foil: "normal" }]);
+    
+    status.textContent = `Success: Added ${allCardsData[cardId].name}`;
+    status.style.color = "green";
+    
+    saveState();
+    updateUI();
+}
+
+/**
+ * Cheat: Resets stats to 0 (for testing unlocks).
+ */
+function devResetProgress() {
+    gameState.player.packsOpened = 0;
+    gameState.player.uniquesOwned = 0; // Will recalc on next add
+    saveState();
+    updateUI();
+    alert("Progress stats reset to 0.");
+}
+
+/**
+ * Cheat: Sets stats high (to unlock everything).
+ */
+function devMaxProgress() {
+    gameState.player.packsOpened = 999;
+    gameState.player.uniquesOwned = 999;
+    saveState();
+    updateUI();
+    alert("Progress stats maxed out. Foils and Alts unlocked!");
+}
 
 // --- 5. START THE GAME ---
 // This is the last line. It tells the browser to run our 'initGame'
