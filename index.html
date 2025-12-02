@@ -22,6 +22,7 @@
             <img src="images/ui/nav-museum.png" alt="Museum" class="nav-button" data-panel="museum-panel">
             <img src="images/ui/nav-packs.png" alt="Packs" class="nav-button" data-panel="packs-panel">
             <img src="images/ui/nav-expeditions.png" alt="Expeditions" class="nav-button" data-panel="expeditions-panel">
+            <img src="images/ui/nav-devtools.png" alt="DevTools" class="nav-button" data-panel="devtools-panel" style="filter: hue-rotate(90deg);">
         </nav>
         
         <main class="main-content">
@@ -188,6 +189,41 @@
 
                         </div>
                 </div>
+            </div>
+
+            <div id="devtools-panel" class="panel">
+                <h2>Developer Tools</h2>
+                <p>Cheats and utilities for testing.</p>
+
+                <div class="dev-section">
+                    <h3>Generators</h3>
+                    <div class="dev-controls">
+                        <label>Type:</label>
+                        <select id="dev-pack-select" class="cozy-select">
+                            </select>
+                    </div>
+                    <div class="dev-buttons">
+                        <button class="game-button" onclick="devAddPacks(1)">+1 Pack</button>
+                        <button class="game-button" onclick="devAddPacks(5)">+5 Packs</button>
+                        <button class="game-button" onclick="devAddPacks(100)">+100 Packs</button>
+                    </div>
+                </div>
+
+                <div class="dev-section">
+                    <h3>Card Spawner</h3>
+                    <div class="dev-controls">
+                        <input type="text" id="dev-card-input" placeholder="e.g. rock-001" class="dev-input">
+                        <button class="game-button" onclick="devAddCard()">Spawn Card</button>
+                    </div>
+                    <p id="dev-card-status" class="quiet-stat"></p>
+                </div>
+                
+                <div class="dev-section">
+                    <h3>Resources</h3>
+                    <button class="game-button" onclick="devResetProgress()">Reset Progress Stats</button>
+                    <button class="game-button" onclick="devMaxProgress()">Max Out Progress</button>
+                </div>
+
             </div>
 
         </main>
