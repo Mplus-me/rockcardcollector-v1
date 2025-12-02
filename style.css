@@ -992,3 +992,32 @@ h1, h2 {
     border-top: 2px dashed #C9C1A5;
     text-align: center;
 }
+
+/* --- 22. DevTools Styles --- */
+.dev-section {
+    background-color: #E0DAB9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 2px dashed #C9C1A5;
+}
+
+.dev-controls {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dev-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.dev-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #C9C1A5;
+    font-family: 'Verdana', sans-serif;
+    width: 200px;
+}
