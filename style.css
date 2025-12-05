@@ -125,8 +125,8 @@ h1, h2 {
 
 /* --- Rarity Border Colors --- */
 /* We use the rarity from cards.json to color the borders */
-.card-in-grid.rarity-common { border-color: var(--card-rarity-1; }
-.card-in-grid.rarity-uncommon { border-color: var(--card-rarity-1); } /* Mossy Green */
+.card-in-grid.rarity-common { border-color: var(--card-rarity-1); }
+.card-in-grid.rarity-uncommon { border-color: var(--card-rarity-2); } /* Mossy Green */
 .card-in-grid.rarity-rare { border-color: var(--card-rarity-3); } /* Amethyst Purple */
 
 .card-in-grid.rarity-mythic { border-color: var(--card-rarity-4); } /* Gold/Orange */
@@ -638,7 +638,7 @@ h1, h2 {
 /* The "Packs Opened" text in the Packs panel */
 .quiet-stat {
     font-size: 12px;
-    color: var(--hidden-txt-color) /* Muted gray */
+    color: var(--hidden-txt-color); /* Muted gray */
     font-style: italic;
     margin-bottom: 10px;
 }
