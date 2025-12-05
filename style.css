@@ -491,11 +491,9 @@ h1, h2 {
 
 /* Placeholder for the main game title */
 #game-title-logo {
-    width: 250px;
-    height: 60px; /* Taller than the 40px header padding */
+    width: 280px;
+    height: 80px;
     background-color: var(--secondary-ac-color); /* Light tan */
-    border: 2px dashed #C9C1A5;
-    border-radius: 8px;
     
     /* This vertically centers the 60px logo in the 80px header */
     margin: -10px 0; 
