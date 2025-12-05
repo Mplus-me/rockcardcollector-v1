@@ -41,7 +41,7 @@ h1, h2 {
 
 .game-header {
     padding: 10px 20px;
-    border-bottom: 2px solid #E0DAB9;
+    border-bottom: 2px solid var(--secondary-ac-color);
 }
 
 /* --- Main Layout (Nav + Content) --- */
@@ -52,7 +52,7 @@ h1, h2 {
 
 .main-nav {
     width: 80px;
-    background-color: #E0DAB9; /* A light, earthy tan */
+    background-color: var(--secondary-ac-color); /* A light, earthy tan */
     padding-top: 20px;
     display: flex;
     flex-direction: column;
@@ -271,7 +271,7 @@ h1, h2 {
 #museum-cosmetics {
     margin-top: 20px;
     padding: 15px;
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
     border-radius: 8px;
 }
 
@@ -310,7 +310,7 @@ h1, h2 {
 
 /* --- 8. Expeditions Panel Styles --- */
 #expedition-section, #minigame-section {
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
     border-radius: 8px;
     padding: 15px;
     margin-top: 20px;
@@ -370,7 +370,7 @@ h1, h2 {
 }
 
 .pack-display {
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
     border: 2px solid #C9C1A5;
     border-radius: 8px;
     padding: 5px 10px;
@@ -391,7 +391,7 @@ h1, h2 {
 
 /* --- 10. Packs Panel Styles --- */
 .pack-section {
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
     border-radius: 8px;
     padding: 15px;
     margin-top: 20px;
@@ -415,7 +415,7 @@ h1, h2 {
 #pack-opening-area .pack-display.disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
     transform: none;
 }
 #pack-opening-area .pack-display.disabled .pack-count {
@@ -493,7 +493,7 @@ h1, h2 {
 #game-title-logo {
     width: 250px;
     height: 60px; /* Taller than the 40px header padding */
-    background-color: #E0DAB9; /* Light tan */
+    background-color: var(--secondary-ac-color); /* Light tan */
     border: 2px dashed #C9C1A5;
     border-radius: 8px;
     
@@ -506,7 +506,7 @@ h1, h2 {
     width: 50px;
     height: 50px;
     background-color: #C9C1A5; /* Darker tan */
-    border: 2px solid #E0DAB9;
+    border: 2px solid var(--secondary-ac-color);
     border-radius: 5px;
     margin: 0 auto 5px auto; /* Center it above the text */
     
@@ -522,7 +522,7 @@ h1, h2 {
     width: 100%;
     height: 100px;
     background-color: #C9C1A5;
-    border: 2px solid #E0DAB9;
+    border: 2px solid var(--secondary-ac-color);
     border-radius: 5px;
     margin-bottom: 10px;
 
@@ -575,7 +575,7 @@ h1, h2 {
         padding: 10px 0;
         
         /* Give it a solid background so content doesn't show through */
-        background-color: #E0DAB9; 
+        background-color: var(--secondary-ac-color); 
         z-index: 100; /* Ensures it's on top of all other content */
 
         /* Swap side border for a top border */
@@ -719,7 +719,7 @@ h1, h2 {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
 }
 
 /* Placeholder icon inside the button */
@@ -769,7 +769,7 @@ h1, h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
     padding: 10px;
     border-radius: 5px;
 }
@@ -1017,7 +1017,7 @@ h1, h2 {
 
 /* --- 22. DevTools Styles --- */
 .dev-section {
-    background-color: #E0DAB9;
+    background-color: var(--secondary-ac-color);
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
