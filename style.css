@@ -8,6 +8,7 @@
 --secondary-ac-color: #49302B; /* Deep mocha */
 --header-txt-color: #E0DAB9; /* Sand dune */
 --body-txt-color: #e0dab9; /* Sand dune */
+--alt-txt-color: #49202b; /* Deep mocha */
 --hidden-txt-color: #D69147; /* Golden apricot */
 
 --card-rarity-1: #C9C1A5;
@@ -172,7 +173,7 @@ h1, h2 {
 
 .card-name {
     font-size: 13px;
-    color: var(--body-txt-color);
+    color: var(--alt-txt-color);
     /* Prevents long names from breaking the layout */
     white-space: nowrap;
     overflow: hidden;
