@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Rock Collector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="game-header">
+        <img src="images/ui/game-title.png" alt="My Cozy Rocks" id="game-title-logo">
+
+        <div id="header-pack-inventory" class="pack-inventory">
+            </div>
+    </header>
+
+    <div class="app-container">
+
+        <nav class="main-nav">
+            <img src="images/ui/nav-archive.png" alt="Archive" class="nav-button" data-panel="archive-panel">
+            <img src="images/ui/nav-museum.png" alt="Museum" class="nav-button" data-panel="museum-panel">
+            <img src="images/ui/nav-packs.png" alt="Packs" class="nav-button" data-panel="packs-panel">
+            <img src="images/ui/nav-expeditions.png" alt="Expeditions" class="nav-button" data-panel="expeditions-panel">
+            <img src="images/ui/nav-devtools.png" alt="DevTools" class="nav-button" data-panel="devtools-panel" style="filter: hue-rotate(90deg);">
+        </nav>
+        
+        <main class="main-content">
+            
+            <div id="archive-panel" class="panel active-panel">
+                <h2>Archive</h2>
+                <p>All your collected rocks will appear here.</p>
+
+                <p id="unique-count-display" class="quiet-stat">Unique Rocks Found: 0</p>
+
+                <div class="sort-container">
+                        <label for="archive-sort">Sort by: </label>
+                        <select id="archive-sort" class="cozy-select">
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="rarity-desc">Rarity (Rarest first)</option>
+                            <option value="rarity-asc">Rarity (Common first)</option>
+                            <option value="foil-first">Variant (Foil first)</option>
+                            <option value="art-first">Variant (Alt Art first)</option>
+                        </select>
+                    </div>
+
+                <div id="archive-grid" class="card-grid">
+                    </div>
+
+                <div class="delete-save-container">
+                    <button id="delete-save-button" class="game-button danger-button">
+                        Delete All Save Data
+                    </button>
+                    <p class="quiet-stat" style="margin-top: 10px;">(For testing - this will reset your game!)</p>
+                </div>
+                
+            </div>
+
+            <div id="museum-panel" class="panel">
+                <h2>Museum</h2>
+                <p>Drag your favorite cards from the Archive to display them here. Click a card in the museum to remove it.</p>
+                
+                <div id="museum-display">
+                    <div id="museum-background">
+                        
+                        <div id="museum-grid" class="card-grid">
+                            </div>
+                    </div>
+                </div>
+
+                <div id="museum-cosmetics">
+                    <h3>Display Options</h3>
+                    <p>(Coming soon: backgrounds and frames)</p>
+                </div>
+            </div>
+
+            <div id="packs-panel" class="panel">
+                
+                <div class="pack-section">
+                    <h2>Open Packs</h2>
+                    <p>Click a pack to open it.</p>
+
+                    <p id="packs-opened-display" class="quiet-stat">Total Packs Opened: 0</p>
+                    
+                    <div id="pack-opening-area" class="pack-inventory">
+                        </div>
+                </div>
+
+                <div class="pack-section">
+                    <h2>Convert Duplicates</h2>
+                    <p>Select extra cards (count > 1) to convert them into a new pack.</p>
+                    
+                    <div id="converter-summary">
+                        <span id="converter-points">Total Points: 0</span>
+                        <span id="converter-reward">Reward: (None)</span>
+                        <button id="converter-confirm-btn" class="game-button" disabled>Convert</button>
+                    </div>
+
+                    <p>Your Duplicates:</p>
+                    <div id="converter-grid" class="card-grid">
+                        </div>
+                </div>
+
+            </div>
+
+            <div id="expeditions-panel" class="panel">
+                <h2>Expeditions & Minigames</h2>
+
+                <div id="expedition-section">
+                    <h3>Expeditions</h3>
+                    <p>Send teams out to explore the lands and bring back rocks!</p>
+                    <div id="expedition-slots" class="expedition-grid">
+                        </div>
+                </div>
+
+               <div id="minigame-section">
+                    <h3>Minigames</h3>
+
+                    <div id="minigame-selection">
+                        <p>Select a game to play.</p>
+                        <div class="minigame-grid">
+                            
+                            <button class="minigame-button" data-game="fishing">
+                                <img src="images/ui/game-fishing.png" class="minigame-icon" alt="">
+                                <span>Pond Fishing</span>
+                            </button>
+                            
+                            <button class="minigame-button" data-game="sifting">
+                                <img src="images/ui/game-sifting.png" class="minigame-icon" alt="">
+                                <span>Sifting Sands</span>
+                            </button>
+                            
+                            <button class="minigame-button" data-game="matching" disabled>
+                                <img src="images/ui/game-matching.png" class="minigame-icon" alt="">
+                                <span>Field Matching (Soon)</span>
+                            </button>
+                            
+                            <button class="minigame-button" data-game="cracker" disabled>
+                                <img src="images/ui/game-cracker.png" class="minigame-icon" alt="">
+                                <span>Geode Cracker (Soon)</span>
+                            </button>
+                            
+                            <button class="minigame-button" data-game="sort" disabled>
+                                <img src="images/ui/game-sort.png" class="minigame-icon" alt="">
+                                <span>Sort Stack (Soon)</span>
+                            </button>
+
+                            <button class="minigame-button" data-game="brush" disabled>
+                                <img src="images/ui/game-brush.png" class="minigame-icon" alt="">
+                                <span>Brush It Off (Soon)</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div id="minigame-stages">
+                        <button id="minigame-back-btn" class="game-button">&larr; Back to Minigames</button>
+                        
+                        <div id="fishing-minigame" class="minigame-container">
+                            <h4>Pond Fishing</h4>
+                            <p>Click to cast. When you see "BITE!", click again to reel it in!</p>
+                            
+                            <div id="fishing-pond">
+                                <button id="fishing-button" class="game-button">Cast</button>
+                                <div id="fishing-status" class="status"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="sifting-minigame" class="minigame-container">
+                            <h4>Sifting Sands</h4>
+                            
+                            <div id="sifting-start-area">
+                                <p>Find the 3 rocks in the list before time runs out! Click to start.</p>
+                                <button class="game-button" onclick="startSiftingGame()">Start Sifting</button>
+                            </div>
+                            
+                            <div id="sifting-game-area" style="display: none;">
+                                <div class="sifting-hud">
+                                    <ul id="sifting-find-list">
+                                        </ul>
+                                    <div id="sifting-timer">Time: 20s</div>
+                                </div>
+                                <div id="sifting-sieve">
+                                    </div>
+                                <div id="sifting-status" class="status"></div>
+                            </div>
+                        </div>
+
+                        </div>
+                </div>
+            </div>
+
+            <div id="devtools-panel" class="panel">
+                <h2>Developer Tools</h2>
+                <p>Cheats and utilities for testing.</p>
+
+                <div class="dev-section">
+                    <h3>Generators</h3>
+                    <div class="dev-controls">
+                        <label>Type:</label>
+                        <select id="dev-pack-select" class="cozy-select">
+                            </select>
+                    </div>
+                    <div class="dev-buttons">
+                        <button class="game-button" onclick="devAddPacks(1)">+1 Pack</button>
+                        <button class="game-button" onclick="devAddPacks(5)">+5 Packs</button>
+                        <button class="game-button" onclick="devAddPacks(100)">+100 Packs</button>
+                    </div>
+                </div>
+
+                <div class="dev-section">
+                    <h3>Card Spawner</h3>
+                    <div class="dev-controls">
+                        <input type="text" id="dev-card-input" placeholder="e.g. rock-001" class="dev-input">
+                        <button class="game-button" onclick="devAddCard()">Spawn Card</button>
+                    </div>
+                    <p id="dev-card-status" class="quiet-stat"></p>
+                </div>
+                
+                <div class="dev-section">
+                    <h3>Resources</h3>
+                    <button class="game-button" onclick="devResetProgress()">Reset Progress Stats</button>
+                    <button class="game-button" onclick="devMaxProgress()">Max Out Progress</button>
+                </div>
+
+            </div>
+
+        </main>
+        
+    </div>
+
+    <div id="pack-reveal-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-window">
+            <h2>New Rocks!</h2>
+            <p>You found these new cards in your pack:</p>
+            
+            <div id="pack-reveal-grid" class="card-grid">
+                </div>
+            
+            <button id="modal-close-btn" class="modal-close-button">
+                <img src="images/ui/button-awesome.png" alt="Awesome!">
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+    <script src="script.js"></script>
+</body>
+</html>

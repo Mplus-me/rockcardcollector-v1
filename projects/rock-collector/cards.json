@@ -1,0 +1,1622 @@
+{
+  "rock-001": {
+    "name": "River Pebble",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "A smooth, gray stone, worn by water and time."
+  },
+  "rock-002": {
+    "name": "Sharp Flint",
+    "rarity": "common",
+    "region": "grassland",
+    "flavor": "Used by early ancestors to make tools."
+  },
+  "rock-003": {
+    "name": "Chunk of Granite",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "Speckled with quartz and feldspar."
+  },
+  "rock-004": {
+    "name": "Slate Shard",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "Breaks into flat, thin layers."
+  },
+  "rock-005": {
+    "name": "Sandstone",
+    "rarity": "common",
+    "region": "desert",
+    "flavor": "Feels like rough sand, because it is."
+  },
+  "rock-006": {
+    "name": "Pumice",
+    "rarity": "common",
+    "region": "volcanic",
+    "flavor": "The only rock that floats on water."
+  },
+  "rock-007": {
+    "name": "Basalt",
+    "rarity": "common",
+    "region": "volcanic",
+    "flavor": "The dark, dense rock that forms volcanic islands."
+  },
+  "rock-008": {
+    "name": "Limestone",
+    "rarity": "common",
+    "region": "coast",
+    "flavor": "Often contains tiny, fossilized sea creatures."
+  },
+  "rock-009": {
+    "name": "Seraphinite",
+    "rarity": "mythic",
+    "region": "forest",
+    "flavor": "A deep green stone with shimmery, feather-like patterns."
+  },
+  "rock-010": {
+    "name": "Sea Glass",
+    "rarity": "common",
+    "region": "coast",
+    "flavor": "Man-made glass, tumbled smooth by the ocean."
+  },
+  "rock-011": {
+    "name": "Shale",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "A fine-grained rock that smells like wet mud."
+  },
+  "rock-012": {
+    "name": "Scoria",
+    "rarity": "common",
+    "region": "volcanic",
+    "flavor": "A bubbly, reddish-brown volcanic rock."
+  },
+  "rock-013": {
+    "name": "Chalk",
+    "rarity": "common",
+    "region": "coast",
+    "flavor": "A soft, white limestone formed from plankton shells."
+  },
+  "rock-014": {
+    "name": "Brick Fragment",
+    "rarity": "common",
+    "region": "urban",
+    "flavor": "A piece of a building, now returning to the earth."
+  },
+  "rock-015": {
+    "name": "Cobblestone",
+    "rarity": "common",
+    "region": "urban",
+    "flavor": "Worn smooth by countless footsteps and wagon wheels."
+  },
+  "rock-016": {
+    "name": "Fieldstone",
+    "rarity": "common",
+    "region": "grassland",
+    "flavor": "A common rock found while plowing fields."
+  },
+  "rock-017": {
+    "name": "Mudstone",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "Hardened mud from an ancient river or lake."
+  },
+  "rock-018": {
+    "name": "Asphalt Chunk",
+    "rarity": "common",
+    "region": "urban",
+    "flavor": "A piece of 'urbanite' from a broken road."
+  },
+  "rock-019": {
+    "name": "Glacial Till",
+    "rarity": "common",
+    "region": "glacial",
+    "flavor": "A random mix of clay, sand, and pebbles left by a glacier."
+  },
+  "rock-020": {
+    "name": "Siltstone",
+    "rarity": "common",
+    "region": "desert",
+    "flavor": "More coarse than shale, less coarse than sandstone."
+  },
+  "rock-021": {
+    "name": "Small Geode",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "A plain rock on the outside, full of crystals."
+  },
+  "rock-022": {
+    "name": "Obsidian",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "Natural volcanic glass. Very sharp."
+  },
+  "rock-023": {
+    "name": "Rose Quartz",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "A cloudy pink crystal associated with love."
+  },
+  "rock-024": {
+    "name": "Pyrite",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "Also known as 'Fool's Gold'."
+  },
+  "rock-025": {
+    "name": "Mica",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "Splits into paper-thin, shiny sheets."
+  },
+  "rock-026": {
+    "name": "Turquoise",
+    "rarity": "uncommon",
+    "region": "desert",
+    "flavor": "A striking blue-green mineral."
+  },
+  "rock-027": {
+    "name": "Garnet",
+    "rarity": "uncommon",
+    "region": "riverbed",
+    "flavor": "A deep red gemstone, often found in riverbeds."
+  },
+  "rock-028": {
+    "name": "Malachite",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "Forms in beautiful, swirling green patterns."
+  },
+  "rock-029": {
+    "name": "Sunstone",
+    "rarity": "uncommon",
+    "region": "grassland",
+    "flavor": "Contains tiny copper flakes that glitter in the sun."
+  },
+  "rock-030": {
+    "name": "Petrified Wood",
+    "rarity": "uncommon",
+    "region": "forest",
+    "flavor": "A tree that turned to stone over millions of years."
+  },
+  "rock-031": {
+    "name": "Amber",
+    "rarity": "uncommon",
+    "region": "forest",
+    "flavor": "Fossilized tree resin. Sometimes traps insects."
+  },
+  "rock-032": {
+    "name": "Abalone Shell",
+    "rarity": "uncommon",
+    "region": "coast",
+    "flavor": "The iridescent inner-shell of a sea snail."
+  },
+  "rock-033": {
+    "name": "Tiger's Eye",
+    "rarity": "uncommon",
+    "region": "desert",
+    "flavor": "A golden-brown stone with a silky, shifting luster."
+  },
+  "rock-034": {
+    "name": "Sodalite",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "A rich, royal blue mineral, often veined with white."
+  },
+  "rock-035": {
+    "name": "Lepidolite",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "A lilac-gray mica. It glitters with a soft light."
+  },
+  "rock-036": {
+    "name": "Carnelian",
+    "rarity": "uncommon",
+    "region": "desert",
+    "flavor": "A translucent, fiery orange-red stone."
+  },
+  "rock-037": {
+    "name": "Hematite",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "A heavy, metallic iron ore that can be polished to a mirror."
+  },
+  "rock-038": {
+    "name": "Fordite",
+    "rarity": "uncommon",
+    "region": "urban",
+    "flavor": "Also 'Motor Agate'. Layers of old car paint from factories."
+  },
+  "rock-039": {
+    "name":"Clear Quartz",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "A common crystal prized for its clarity."
+  },
+  "rock-040": {
+    "name": "Jasper",
+    "rarity": "uncommon",
+    "region": "riverbed",
+    "flavor": "An opaque, impure quartz, often red, yellow, or brown."
+  },
+  "rock-041": {
+    "name": "Amethyst",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A brilliant purple crystal said to calm the mind."
+  },
+  "rock-042": {
+    "name": "Lapis Lazuli",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A deep blue stone used for pigment by royalty."
+  },
+  "rock-043": {
+    "name": "Peridot",
+    "rarity": "rare",
+    "region": "volcanic",
+    "flavor": "A bright green gem born in fire."
+  },
+  "rock-044": {
+    "name": "Labradorite",
+    "rarity": "rare",
+    "region": "glacial",
+    "flavor": "A dull gray stone that flashes with peacock-blue light."
+  },
+  "rock-045": {
+    "name": "Aquamarine",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A pale blue gem, said to be the treasure of mermaids."
+  },
+  "rock-046": {
+    "name": "Jade",
+    "rarity": "rare",
+    "region": "forest",
+    "flavor": "A tough, smooth green stone, highly valued for carving."
+  },
+  "rock-047": {
+    "name": "Citrine",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A sunny, yellow-orange quartz. Often mistaken for Topaz."
+  },
+  "rock-048": {
+    "name": "Fulgurite",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "Hollow glass tubes formed by lightning striking sand."
+  },
+  "rock-049": {
+    "name": "Azurite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A vivid, deep blue mineral, often found with Malachite."
+  },
+  "rock-050": {
+    "name": "Rhodochrosite",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A striking mineral with bands of pink and white."
+  },
+  "rock-051": {
+    "name": "Celestite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "Clusters of delicate, sky-blue crystals."
+  },
+  "rock-052": {
+    "name": "Kyanite",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "Forms in flat, blade-like blue crystals."
+  },
+  "rock-053": {
+    "name": "Smoky Quartz",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A clear quartz that has been naturally 'smoked' by radiation."
+  },
+  "rock-054": {
+    "name": "Prehnite",
+    "rarity": "rare",
+    "region": "grassland",
+    "flavor": "A bubbly, translucent green mineral."
+  },
+  "rock-055": {
+    "name": "Fluorite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A cubic crystal that comes in green, purple, and blue."
+  },
+  "rock-056": {
+    "name": "Desert Rose",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "Clusters of gypsum that form in blade-like 'petals'."
+  },
+  "rock-057": {
+    "name": "Ametrine",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A single crystal that is part Amethyst and part Citrine."
+  },
+  "rock-058": {
+    "name": "Manganese Nodule",
+    "rarity": "rare",
+    "region": "abyss",
+    "flavor": "A lumpy black rock from the deep ocean floor."
+  },
+  "rock-059": {
+    "name": "Ice Crystal",
+    "rarity": "rare",
+    "region": "glacial",
+    "flavor": "A perfectly preserved, ancient six-sided snowflake."
+  },
+  "rock-060": {
+    "name": "Topaz",
+    "rarity": "rare",
+    "region": "volcanic",
+    "flavor": "A hard, clear silicate mineral."
+  },
+  "rock-061": {
+    "name": "Opal",
+    "rarity": "mythic",
+    "region": "desert",
+    "flavor": "Catches the light with a fiery, internal rainbow."
+  },
+  "rock-062": {
+    "name": "Meteorite",
+    "rarity": "mythic",
+    "region": "cosmic",
+    "flavor": "A visitor from the stars. Feels heavy."
+  },
+  "rock-063": {
+    "name": "Moonstone",
+    "rarity": "mythic",
+    "region": "grassland",
+    "flavor": "Shines with a soft, pearly, blueish light."
+  },
+  "rock-064": {
+    "name": "Moldavite",
+    "rarity": "mythic",
+    "region": "grassland",
+    "flavor": "A deep green glass formed from a meteorite impact."
+  },
+  "rock-065": {
+    "name": "Bismuth",
+    "rarity": "mythic",
+    "region": "cave",
+    "flavor": "A brittle metal with an iridescent, geometric 'stair-step' look."
+  },
+  "rock-066": {
+    "name": "Fire Opal",
+    "rarity": "mythic",
+    "region": "volcanic",
+    "flavor": "A vibrant, translucent red-orange opal that glows like an ember."
+  },
+  "rock-067": {
+    "name": "Peacock Ore",
+    "rarity": "mythic",
+    "region": "mountain",
+    "flavor": "Bornite that has tarnished to a brilliant, oily purple-blue."
+  },
+  "rock-068": {
+    "name": "Larimar",
+    "rarity": "mythic",
+    "region": "coast",
+    "flavor": "A rare blue mineral that looks like tropical water."
+  },
+  "rock-069": {
+    "name": "Gneiss",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "A metamorphic rock with distinct wavy bands."
+  },
+  "rock-070": {
+    "name": "Pallasite",
+    "rarity": "mythic",
+    "region": "cosmic",
+    "flavor": "A piece of meteorite with olivine crystals (Peridot) set in metal."
+  },
+  "rock-071": {
+    "name": "Tektite",
+    "rarity": "mythic",
+    "region": "cosmic",
+    "flavor": "Natural glass formed from the debris of a meteor strike."
+  },
+  "rock-072": {
+    "name": "Watermelon Tourmaline",
+    "rarity": "mythic",
+    "region": "mountain",
+    "flavor": "A crystal that is pink in the center and green on the outside."
+  },
+  "rock-073": {
+    "name": "Hydrothermal Vent",
+    "rarity": "mythic",
+    "region": "abyss",
+    "flavor": "A chimney of minerals formed by superheated water."
+  },
+  "rock-074": {
+    "name": "Sunpetal Shard",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "A crystal that is pleasantly warm to the touch."
+  },
+  "rock-075": {
+    "name":"Moondrop",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "Feels cool and calm, even on a hot day."
+  },
+  "rock-076": {
+    "name": "Whisperwind Stone",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "A porous, lightweight stone that hums faintly in a breeze."
+  },
+  "rock-077": {
+    "name": "Tidal Heart",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "A perfectly smooth stone that seems to pulse with a slow rhythm."
+  },
+  "rock-078": {
+    "name": "Canyon Echo",
+    "rarity": "mythic",
+    "region": "desert",
+    "flavor": "A layered sandstone that seems to hold a sound within it."
+  },
+  "rock-079": {
+    "name": "Mammoth Tusk",
+    "rarity": "mythic",
+    "region": "glacial",
+    "flavor": "A fragment of ivory, preserved in the permafrost."
+  },
+  "rock-080": {
+    "name": "Uvarovite",
+    "rarity": "mythic",
+    "region": "mountain",
+    "flavor": "A rare, bright green garnet that forms in tiny crystals."
+  },
+  "rock-081": {
+    "name": "Diamond (Raw)",
+    "rarity": "legendary",
+    "region": "cave",
+    "flavor": "The hardest natural substance known."
+  },
+  "rock-082": {
+    "name": "Rainbow Obsidian",
+    "rarity": "legendary",
+    "region": "volcanic",
+    "flavor": "An obsidian variant that reveals hidden, colored layers."
+  },
+  "rock-083": {
+    "name": "Emerald (Raw)",
+    "rarity": "legendary",
+    "region": "mountain",
+    "flavor": "A deep green beryl crystal, set in its matrix rock."
+  },
+  "rock-084": {
+    "name": "Ruby (Raw)",
+    "rarity": "legendary",
+    "region": "mountain",
+    "flavor": "A red corundum crystal. Glows under blacklight."
+  },
+  "rock-085": {
+    "name": "Sapphire (Raw)",
+    "rarity": "legendary",
+    "region": "riverbed",
+    "flavor": "A blue corundum crystal, often found among river gravel."
+  },
+  "rock-086": {
+    "name": "Alexandrite",
+    "rarity": "legendary",
+    "region": "mountain",
+    "flavor": "Changes color from green in daylight to red in candlelight."
+  },
+  "rock-087": {
+    "name": "Black Opal",
+    "rarity": "legendary",
+    "region": "desert",
+    "flavor": "The rarest type of opal, with a dark body and brilliant fire."
+  },
+  "rock-088": {
+    "name": "Tanzanite",
+    "rarity": "legendary",
+    "region": "mountain",
+    "flavor": "A stunning blue-violet gem found only in one place on Earth."
+  },
+  "rock-089": {
+    "name": "Painite",
+    "rarity": "legendary",
+    "region": "cave",
+    "flavor": "Once considered the rarest mineral on the planet."
+  },
+  "rock-090": {
+    "name": "Starmetal",
+    "rarity": "legendary",
+    "region": "cosmic",
+    "flavor": "A piece of meteorite with a perfect, unnatural geometric pattern."
+  },
+  "rock-091": {
+    "name": "Aurora Shard",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A crystal that contains a shifting, colorful light."
+  },
+  "rock-092": {
+    "name": "Worldheart Fragment",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "It beats with a slow, powerful, and ancient rhythm."
+  },
+  "rock-093": {
+    "name": "Abyssalite",
+    "rarity": "legendary",
+    "region": "abyss",
+    "flavor": "A perfectly black stone that seems to absorb all light."
+  },
+  "rock-094": {
+    "name": "Phoenix Ember",
+    "rarity": "legendary",
+    "region": "volcanic",
+    "flavor": "A volcanic gem that never fully cools."
+  },
+  "rock-095": {
+    "name": "Glacial Core",
+    "rarity": "legendary",
+    "region": "glacial",
+    "flavor": "A piece of ice from the dawn of time. It will not melt."
+  },
+  "rock-096": {
+    "name": "Timeless Pebble",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "It looks like a simple river pebble, but it feels... important."
+  },
+  "rock-097": {
+    "name": "Lightning Opal",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "An opal that seems to flash with an internal storm."
+  },
+  "rock-098": {
+    "name": "Philosopher's Stone",
+    "rarity": "legendary",
+    "region": "urban",
+    "flavor": "Is this... it? It looks like a piece of red brick."
+  },
+  "rock-099": {
+    "name": "Chunk of the Moon",
+    "rarity": "legendary",
+    "region": "cosmic",
+    "flavor": "A genuine lunar meteorite, ejected from the Moon's surface."
+  },
+  "rock-100": {
+    "name": "Genesis Fragment",
+    "rarity": "legendary",
+    "region": "cosmic",
+    "flavor": "A piece of stardust older than the sun itself."
+  },
+  "rock-101": {
+    "name": "Jingle Bell Rock",
+    "rarity": "special",
+    "region": "glacial",
+    "flavor": "A round, metallic stone that jingles when shaken. (Winter Event)"
+  },
+  "rock-102": {
+    "name": "Sugar Stone",
+    "rarity": "special",
+    "region": "glacial",
+    "flavor": "A red and white banded crystal that looks like a candy cane. (Winter Event)"
+  },
+  "rock-103": {
+    "name": "Soot-Stained Pebble",
+    "rarity": "special",
+    "region": "urban",
+    "flavor": "A lump of coal... or a warning? (Winter Event)"
+  },
+  "rock-104": {
+    "name": "Spooky Geode",
+    "rarity": "special",
+    "region": "cave",
+    "flavor": "It's filled with black and orange crystals. (Halloween Event)"
+  },
+  "rock-105": {
+    "name": "Tombstone Shard",
+    "rarity": "special",
+    "region": "urban",
+    "flavor": "A piece of weathered marble. Smells like graveyard fog. (Halloween Event)"
+  },
+  "rock-106": {
+    "name": "Spectral Quartz",
+    "rarity": "special",
+    "region": "ethereal",
+    "flavor": "A cloudy quartz that seems to hold a ghostly face. (Halloween Event)"
+  },
+  "rock-107": {
+    "name": "Gourd-Stone",
+    "rarity": "special",
+    "region": "grassland",
+    "flavor": "A lumpy, orange rock that looks suspiciously like a tiny pumpkin. (Halloween Event)"
+  },
+  "rock-108": {
+    "name":"Heartstone",
+    "rarity": "special",
+    "region": "riverbed",
+    "flavor": "A river pebble worn into a perfect heart shape. (Valentine's Event)"
+  },
+  "rock-109": {
+    "name": "Choco-Rock",
+    "rarity": "special",
+    "region": "cave",
+    "flavor": "Looks like a chunk of chocolate, but it's just a rock. ...Right? (Easter Event)"
+  },
+  "rock-110": {
+    "name": "Painted Egg",
+    "rarity": "special",
+    "region": "grassland",
+    "flavor": "A perfectly oval stone painted with bright patterns. (Easter Event)"
+  },
+  "rock-111": {
+    "name": "Firework Crystal",
+    "rarity": "special",
+    "region": "ethereal",
+    "flavor": "A dark crystal that explodes with light when you tap it. (New Year's Event)"
+  },
+  "rock-112": {
+    "name": "New Year Comet",
+    "rarity": "special",
+    "region": "cosmic",
+    "flavor": "A small, icy fragment, here to mark a new beginning. (New Year's Event)"
+  },
+  "rock-113": {
+    "name": "Solstice Sunstone",
+    "rarity": "special",
+    "region": "ethereal",
+    "flavor": "This stone is at its brightest on the longest day of the year. (Summer Event)"
+  },
+  "rock-114": {
+    "name": "Beach Ball Stone",
+    "rarity": "special",
+    "region": "coast",
+    "flavor": "A perfectly round, colorful stone. Smells like sunscreen. (Summer Event)"
+  },
+  "rock-115": {
+    "name": "Lucky Clover Stone",
+    "rarity": "special",
+    "region": "forest",
+    "flavor": "A slice of green agate with a perfect four-leaf pattern. (Spring Event)"
+  },
+  "rock-116": {
+    "name": "Raindrop Crystal",
+    "rarity": "special",
+    "region": "riverbed",
+    "flavor": "A teardrop-shaped crystal that is always wet. (Spring Event)"
+  },
+  "rock-117": {
+    "name": "Two-Rock",
+    "rarity": "special",
+    "region": "ethereal",
+    "flavor": "A pair of identical 'twin' pebbles. (Anniversary Event)"
+  },
+  "rock-118": {
+    "name": "Birthday Stone",
+    "rarity": "special",
+    "region": "ethereal",
+    "flavor": "A piece of colorful confetti, fossilized into rock. (Anniversary Event)"
+  },
+  "rock-119": {
+    "name": "Autumn Leaf Jasper",
+    "rarity": "special",
+    "region": "forest",
+    "flavor": "A piece of jasper with the colors of a falling leaf. (Autumn Event)"
+  },
+  "rock-120": {
+    "name": "Harvest Stone",
+    "rarity": "special",
+    "region": "grassland",
+    "flavor": "A 'corn' yellow agate, said to bring a good harvest. (Autumn Event)"
+  },
+   "rock-121": {
+    "name": "Conglomerate",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "A lumpy rock made of other, smaller pebbles cemented together."
+  },
+  "rock-122": {
+    "name": "Quartzite",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "A very hard, non-foliated metamorphic rock. Was once sandstone."
+  },
+  "rock-123": {
+    "name": "Gabbro",
+    "rarity": "common",
+    "region": "volcanic",
+    "flavor": "A coarse-grained, dark rock. Similar to basalt but formed underground."
+  },
+  "rock-124": {
+    "name": "Schist",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "A metamorphic rock with flaky, parallel layers. Often glitters with mica."
+  },
+  "rock-125": {
+    "name": "Chert",
+    "rarity": "common",
+    "region": "coast",
+    "flavor": "A hard, fine-grained rock. Very similar to flint."
+  },
+  "rock-126": {
+    "name": "Halite",
+    "rarity": "common",
+    "region": "desert",
+    "flavor": "Natural rock salt. Tastes salty, but please don't lick it."
+  },
+  "rock-127": {
+    "name": "Soapstone",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "A soft rock, rich in talc. Feels slightly soapy to the touch."
+  },
+  "rock-128": {
+    "name": "Gypsum",
+    "rarity": "common",
+    "region": "cave",
+    "flavor": "A very soft mineral. Used to make plaster and drywall."
+  },
+  "rock-129": {
+    "name": "Talc",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "The softest known mineral on Earth."
+  },
+  "rock-130": {
+    "name": "Dolomite",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "A sedimentary rock, similar to limestone but with more magnesium."
+  },
+  "rock-131": {
+    "name": "River Glass",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "Like sea glass, but tumbled by a river's current."
+  },
+  "rock-132": {
+    "name": "Concrete Chunk",
+    "rarity": "common",
+    "region": "urban",
+    "flavor": "Modern-day conglomerate. Contains sand, gravel, and cement."
+  },
+  "rock-133": {
+    "name": "Marble Chip",
+    "rarity": "common",
+    "region": "urban",
+    "flavor": "A broken piece from a statue or countertop."
+  },
+  "rock-134": {
+    "name": "Fossilized Leaf",
+    "rarity": "common",
+    "region": "forest",
+    "flavor": "A simple leaf imprint, preserved in mudstone."
+  },
+  "rock-135": {
+    "name": "Small Ammonite",
+    "rarity": "common",
+    "region": "coast",
+    "flavor": "The fossilized, spiral-shaped shell of an ancient sea creature."
+  },
+  "rock-136": {
+    "name": "Trilobite Cast",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "The impression left behind by a long-gone trilobite."
+  },
+  "rock-137": {
+    "name": "Loess",
+    "rarity": "common",
+    "region": "grassland",
+    "flavor": "A deposit of wind-blown silt. Very fine and dusty."
+  },
+  "rock-138": {
+    "name": "Clay",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "A sticky, fine-grained soil. Becomes hard when fired."
+  },
+  "rock-139": {
+    "name": "Peat",
+    "rarity": "common",
+    "region": "grassland",
+    "flavor": "Spongy, decayed plant matter. An early precursor to coal."
+  },
+  "rock-140": {
+    "name": "Lignite",
+    "rarity": "common",
+    "region": "cave",
+    "flavor": "Brown coal. A soft, combustible rock."
+  },
+  "rock-141": {
+    "name": "Anthracite",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "Hard, shiny coal. Burns with very little smoke."
+  },
+  "rock-142": {
+    "name": "Frost Heave Pebble",
+    "rarity": "common",
+    "region": "glacial",
+    "flavor": "A rock that was pushed to the surface by freezing ground."
+  },
+  "rock-143": {
+    "name": "Ice-Wedged Schist",
+    "rarity": "common",
+    "region": "glacial",
+    "flavor": "A piece of schist that was split apart by freezing water."
+  },
+  "rock-144": {
+    "name": "Tufa",
+    "rarity": "common",
+    "region": "riverbed",
+    "flavor": "A porous limestone formed in hot springs or lake shores."
+  },
+  "rock-145": {
+    "name": "Rhyolite",
+    "rarity": "common",
+    "region": "volcanic",
+    "flavor": "A volcanic rock, high in silica. The volcanic equivalent of granite."
+  },
+  "rock-146": {
+    "name": "Andesite",
+    "rarity": "common",
+    "region": "volcanic",
+    "flavor": "A gray-to-black volcanic rock, named after the Andes Mountains."
+  },
+  "rock-147": {
+    "name": "Beach Stone",
+    "rarity": "common",
+    "region": "coast",
+    "flavor": "A perfectly smooth, flat stone, ideal for skipping."
+  },
+  "rock-148": {
+    "name": "Porphyry",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "An igneous rock with large crystals set in a fine-grained matrix."
+  },
+  "rock-149": {
+    "name": "Serpentine",
+    "rarity": "common",
+    "region": "forest",
+    "flavor": "A dull, waxy-feeling rock, often green or brown."
+  },
+  "rock-150": {
+    "name": "Hornfels",
+    "rarity": "common",
+    "region": "mountain",
+    "flavor": "A hard, fine-grained rock 'baked' by nearby magma."
+  },
+  "rock-151": {
+    "name": "Calcite",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "A very common mineral. Can be orange, blue, green, or clear."
+  },
+  "rock-152": {
+    "name": "Aragonite",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "Forms in spiky, star-like clusters. Chemically identical to calcite."
+  },
+  "rock-153": {
+    "name": "Selenite",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "A clear, crystallized form of gypsum. Often forms in 'wands'."
+  },
+  "rock-154": {
+    "name": "Milky Quartz",
+    "rarity": "uncommon",
+    "region": "grassland",
+    "flavor": "A common, cloudy white quartz. Its color comes from tiny fluid inclusions."
+  },
+  "rock-155": {
+    "name": "Agate",
+    "rarity": "uncommon",
+    "region": "riverbed",
+    "flavor": "A common type of chalcedony, known for its fine bands."
+  },
+  "rock-156": {
+    "name": "Onyx",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "A type of agate with straight, parallel bands of black and white."
+  },
+  "rock-157": {
+    "name": "Bornite",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "A copper iron sulfide mineral. Tarnishes to an iridescent purple."
+  },
+  "rock-158": {
+    "name": "Chalcopyrite",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "A brassy-yellow mineral. Often confused with Pyrite."
+  },
+  "rock-159": {
+    "name": "Magnetite",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "A naturally magnetic iron ore. Also known as Lodestone."
+  },
+  "rock-160": {
+    "name": "Graphite",
+    "rarity": "uncommon",
+    "region": "mountain",
+    "flavor": "A soft, carbon mineral. The 'lead' in your pencil."
+  },
+  "rock-161": {
+    "name": "Sulphur",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "A bright yellow mineral that smells like rotten eggs."
+  },
+  "rock-162": {
+    "name": "Howlite",
+    "rarity": "uncommon",
+    "region": "desert",
+    "flavor": "A white, porous stone with gray veins. Often dyed to look like Turquoise."
+  },
+  "rock-163": {
+    "name": "Unakite",
+    "rarity": "uncommon",
+    "region": "riverbed",
+    "flavor": "A mottled green and pink rock, composed of epidote and feldspar."
+  },
+  "rock-164": {
+    "name": "Bloodstone",
+    "rarity": "uncommon",
+    "region": "riverbed",
+    "flavor": "A dark green jasper with small red, blood-like spots."
+  },
+  "rock-165": {
+    "name": "Zebra Jasper",
+    "rarity": "uncommon",
+    "region": "desert",
+    "flavor": "An opaque stone with black and white stripes, like its namesake."
+  },
+  "rock-166": {
+    "name": "Dalmatian Jasper",
+    "rarity": "uncommon",
+    "region": "desert",
+    "flavor": "A pale, spotted stone. The spots are black tourmaline."
+  },
+  "rock-167": {
+    "name": "A'a Lava",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "A type of lava that forms a rough, jagged, and clumpy surface."
+  },
+  "rock-168": {
+    "name": "Pahoehoe Lava",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "A type of lava that forms a smooth, billowy, or 'ropey' surface."
+  },
+  "rock-169": {
+    "name": "Pele's Hair",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "Fine strands of volcanic glass, spun by the wind from lava."
+  },
+  "rock-170": {
+    "name": "Pele's Tears",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "Small, black, teardrop-shaped bits of volcanic glass."
+  },
+  "rock-171": {
+    "name": "Sand Dollar",
+    "rarity": "uncommon",
+    "region": "coast",
+    "flavor": "The bleached, fossilized skeleton of a flat sea urchin."
+  },
+  "rock-172": {
+    "name": "Crinoid Stem",
+    "rarity": "uncommon",
+    "region": "coast",
+    "flavor": "A fossilized 'sea lily' stem. Looks like a small, stone bead."
+  },
+  "rock-173": {
+    "name": "Shark Tooth",
+    "rarity": "uncommon",
+    "region": "coast",
+    "flavor": "A fossilized tooth, blackened by minerals over millions of years."
+  },
+  "rock-174": {
+    "name": "Petrified Root",
+    "rarity": "uncommon",
+    "region": "forest",
+    "flavor": "The gnarled, stony remains of an ancient tree's root system."
+  },
+  "rock-175": {
+    "name": "Blue Ice",
+    "rarity": "uncommon",
+    "region": "glacial",
+    "flavor": "Glacial ice that has been compressed, pushing all the air bubbles out."
+  },
+  "rock-176": {
+    "name": "Glacial Flour",
+    "rarity": "uncommon",
+    "region": "glacial",
+    "flavor": "Fine-grained silt from glaciers grinding rock. It turns lakes turquoise."
+  },
+  "rock-177": {
+    "name": "Cryoconite",
+    "rarity": "uncommon",
+    "region": "glacial",
+    "flavor": "Powdery, windblown dust that settles on glaciers and melts holes."
+  },
+  "rock-178": {
+    "name": "Permafrost Core",
+    "rarity": "uncommon",
+    "region": "glacial",
+    "flavor": "A sample of soil that has been frozen for at least two years."
+  },
+  "rock-179": {
+    "name": "Snowflake Obsidian",
+    "rarity": "uncommon",
+    "region": "volcanic",
+    "flavor": "Black obsidian with white, 'snowflake' patterns of cristobalite."
+  },
+  "rock-180": {
+    "name": "Cave Pearl",
+    "rarity": "uncommon",
+    "region": "cave",
+    "flavor": "A small, round sphere of calcite formed by dripping water."
+  },
+  "rock-181": {
+    "name": "Iolite",
+    "rarity": "rare",
+    "region": "riverbed",
+    "flavor": "A violet-blue gem. Vikings may have used it as a polarizing filter."
+  },
+  "rock-182": {
+    "name": "Apatite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "Comes in many colors, but most known for its deep blue-green."
+  },
+  "rock-183": {
+    "name": "Spinel",
+    "rarity": "rare",
+    "region": "riverbed",
+    "flavor": "A hard, glassy mineral. The 'Black Prince's Ruby' is actually a spinel."
+  },
+  "rock-184": {
+    "name": "Zircon",
+    "rarity": "rare",
+    "region": "riverbed",
+    "flavor": "A brilliant gemstone. The oldest known mineral on Earth."
+  },
+  "rock-185": {
+    "name": "Black Tourmaline",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A pitch-black, striated crystal. Also known as Schorl."
+  },
+  "rock-186": {
+    "name": "Morganite",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A pale pink to peach-colored beryl. A cousin to Emerald."
+  },
+  "rock-187": {
+    "name": "Chrysocolla",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "A bright cyan-green copper mineral. Often found with malachite."
+  },
+  "rock-188": {
+    "name": "Dioptase",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "An intense, emerald-green copper mineral that forms small crystals."
+  },
+  "rock-189": {
+    "name": "Variscite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A minty-green mineral, often found in nodules."
+  },
+  "rock-190": {
+    "name": "Adamite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A zinc mineral known for its bright yellow-green, fluorescent crystals."
+  },
+  "rock-191": {
+    "name": "Boulder Opal",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "Thin seams of precious opal, still attached to their host rock."
+  },
+  "rock-192": {
+    "name": "Fire Agate",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "A type of agate that has a bubbly, iridescent 'fire' inside."
+  },
+  "rock-193": {
+    "name": "Spectrolite",
+    "rarity": "rare",
+    "region": "glacial",
+    "flavor": "A high-quality Labradorite from Finland with a full spectrum of color."
+  },
+  "rock-194": {
+    "name": "Pietersite",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "A 'stormy' looking stone with chaotic swirls of blue, gold, and red."
+  },
+  "rock-195": {
+    "name": "Vanadinite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "Forms in brilliant red, hexagonal (six-sided) crystals."
+  },
+  "rock-196": {
+    "name": "Wulfenite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "Forms in bright orange-red, square, tabular crystals."
+  },
+  "rock-197": {
+    "name": "Crocoite",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "A rare mineral that forms in fiery, reddish-orange needle-like crystals."
+  },
+  "rock-198": {
+    "name": "Benitoite",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A rare, sapphire-blue gemstone that glows bright blue under UV light."
+  },
+  "rock-199": {
+    "name": "Kunzite",
+    "rarity": "rare",
+    "region": "mountain",
+    "flavor": "A pink-to-lilac colored spodumene crystal. Can fade in sunlight."
+  },
+  "rock-200": {
+    "name": "Hiddenite",
+    "rarity": "rare",
+    "region": "forest",
+    "flavor": "A pale, emerald-green spodumene crystal. A 'sister' to Kunzite."
+  },
+  "rock-201": {
+    "name": "Bumblebee Jasper",
+    "rarity": "rare",
+    "region": "volcanic",
+    "flavor": "A vibrant yellow, orange, and black stone. Its color comes from sulphur."
+  },
+  "rock-202": {
+    "name": "Ocean Jasper",
+    "rarity": "rare",
+    "region": "coast",
+    "flavor": "A type of jasper known for its colorful, orb-like patterns."
+  },
+  "rock-203": {
+    "name": "Mookaite Jasper",
+    "rarity": "rare",
+    "region": "desert",
+    "flavor": "A colorful jasper from Australia with swirls of deep red and yellow."
+  },
+  "rock-204": {
+    "name": "Arctic Glass",
+    "rarity": "rare",
+    "region": "glacial",
+    "flavor": "Sea glass that has been trapped in ice, giving it a unique, crackled look."
+  },
+  "rock-205": {
+    "name": "Frozen Geode",
+    "rarity": "rare",
+    "region": "glacial",
+    "flavor": "A geode with pale blue crystals that look like they're made of ice."
+  },
+  "rock-206": {
+    "name": "Ice Cave Crystal",
+    "rarity": "rare",
+    "region": "glacial",
+    "flavor": "A six-sided crystal of 'rock' ice, formed by slow freezing."
+  },
+  "rock-207": {
+    "name": "Bioluminescent Rock",
+    "rarity": "rare",
+    "region": "abyss",
+    "flavor": "A porous rock from the deep, home to a colony of glowing bacteria."
+  },
+  "rock-208": {
+    "name": "Whale Fall Bone",
+    "rarity": "rare",
+    "region": "abyss",
+    "flavor": "A piece of a whale skeleton, fossilized on the ocean floor."
+  },
+  "rock-209": {
+    "name": "Tube Worm Fossil",
+    "rarity": "rare",
+    "region": "abyss",
+    "flavor": "The stony, hollow casing of a deep-sea hydrothermal vent worm."
+  },
+  "rock-210": {
+    "name": "Stalactite Tip",
+    "rarity": "rare",
+    "region": "cave",
+    "flavor": "The broken-off end of a 'ceiling icicle' in a cave."
+  },
+  "rock-211": {
+    "name": "Charoite",
+    "rarity": "mythic",
+    "region": "riverbed",
+    "flavor": "A rare, vibrant purple stone from Siberia with a swirling pattern."
+  },
+  "rock-212": {
+    "name": "Sugilite",
+    "rarity": "mythic",
+    "region": "mountain",
+    "flavor": "A vivid, pink-to-purple mineral."
+  },
+  "rock-213": {
+    "name": "Eudialyte",
+    "rarity": "mythic",
+    "region": "glacial",
+    "flavor": "A rare, complex mineral known for its striking magenta-red color."
+  },
+  "rock-214": {
+    "name": "Stibnite",
+    "rarity": "mythic",
+    "region": "cave",
+    "flavor": "Forms in beautiful, metallic-gray, needle-like crystal clusters."
+  },
+  "rock-215": {
+    "name": "Rhodonite",
+    "rarity": "mythic",
+    "region": "mountain",
+    "flavor": "A manganese mineral known for its rose-pink color and black veins."
+  },
+  "rock-216": {
+    "name": "Ammolite",
+    "rarity": "mythic",
+    "region": "grassland",
+    "flavor": "An opal-like, iridescent fossil shell of an ammonite."
+  },
+  "rock-217": {
+    "name": "Dioptase Geode",
+    "rarity": "mythic",
+    "region": "desert",
+    "flavor": "A hollow rock lined with tiny, perfect, emerald-green Dioptase crystals."
+  },
+  "rock-218": {
+    "name": "Chrysoprase",
+    "rarity": "mythic",
+    "region": "desert",
+    "flavor": "The rarest variety of chalcedony. A translucent, apple-green stone."
+  },
+  "rock-219": {
+    "name": "Gem Silica",
+    "rarity": "mythic",
+    "region": "desert",
+    "flavor": "A rare, blue-green, highly translucent form of Chrysocolla."
+  },
+  "rock-220": {
+    "name": "Euclase",
+    "rarity": "mythic",
+    "region": "mountain",
+    "flavor": "A brittle, typically blue beryllium mineral. Prized for its color."
+  },
+  "rock-221": {
+    "name": "Phosphophyllite",
+    "rarity": "mythic",
+    "region": "cave",
+    "flavor": "A very rare and delicate mineral, famous for its beautiful blue-green color."
+  },
+  "rock-222": {
+    "name": "Taaffeite",
+    "rarity": "mythic",
+    "region": "riverbed",
+    "flavor": "An extremely rare, purplish gemstone. Was mistaken for Spinel for years."
+  },
+  "rock-223": {
+    "name": "Musgravite",
+    "rarity": "mythic",
+    "region": "riverbed",
+    "flavor": "A cousin to Taaffeite, and one of the rarest gemstones in the world."
+  },
+  "rock-224": {
+    "name": "Lightning Ridge Opal",
+    "rarity": "mythic",
+    "region": "desert",
+    "flavor": "A famous Black Opal, with a red-on-black fire that is legendary."
+  },
+  "rock-225": {
+    "name": "Stromatolite",
+    "rarity": "mythic",
+    "region": "coast",
+    "flavor": "A layered rock, built by ancient bacteria. A living fossil."
+  },
+  "rock-226": {
+    "name": "Martian 'Blueberry'",
+    "rarity": "mythic",
+    "region": "cosmic",
+    "flavor": "A small, hematite-rich sphere, discovered on the surface of Mars."
+  },
+  "rock-227": {
+    "name": "Trinitite",
+    "rarity": "mythic",
+    "region": "urban",
+    "flavor": "A glassy green rock formed from desert sand fused by the first atomic bomb."
+  },
+  "rock-228": {
+    "name": "Elysian Shard",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "This fragment of pure light seems to hum with a gentle melody."
+  },
+  "rock-229": {
+    "name": "Weeping Stone",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "It's always damp, and seems to exude a feeling of gentle sorrow."
+  },
+  "rock-230": {
+    "name": "Glowmoss Rock",
+    "rarity": "mythic",
+    "region": "forest",
+    "flavor": "A common-looking forest rock, but the moss on it glows in the dark."
+  },
+  "rock-231": {
+    "name": "Heart of the Mountain",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "A crystal that pulses with a slow, steady light, like a beating heart."
+  },
+  "rock-232": {
+    "name": "Fairy Stone",
+    "rarity": "mythic",
+    "region": "forest",
+    "flavor": "A small, whimsical stone, naturally shaped like a tiny person or animal."
+  },
+  "rock-233": {
+    "name": "Leviathan Scale",
+    "rarity": "mythic",
+    "region": "abyss",
+    "flavor": "A stone scale from a creature of unimaginable size. Found at the bottom of the sea."
+  },
+  "rock-234": {
+    "name": "Kraken's Beak",
+    "rarity": "mythic",
+    "region": "abyss",
+    "flavor": "The fossilized, jet-black beak of a truly colossal, ancient squid."
+  },
+  "rock-235": {
+    "name": "Frozen Spark",
+    "rarity": "mythic",
+    "region": "glacial",
+    "flavor": "A tiny, unmelting flame, trapped inside a perfect ice crystal."
+  },
+  "rock-236": {
+    "name": "Sky-Iron",
+    "rarity": "mythic",
+    "region": "cosmic",
+    "flavor": "A meteorite fragment that is lighter than it should be."
+  },
+  "rock-237": {
+    "name": "Opalized Fossil",
+    "rarity": "mythic",
+    "region": "desert",
+    "flavor": "A piece of ancient wood or bone, where every cell has been replaced by opal."
+  },
+  "rock-238": {
+    "name": "Singing Stone",
+    "rarity": "mythic",
+    "region": "riverbed",
+    "flavor": "A simple river rock that, when held, fills your head with a quiet song."
+  },
+  "rock-239": {
+    "name": "Lodestar",
+    "rarity": "mythic",
+    "region": "ethereal",
+    "flavor": "A magnetic stone that doesn't point North, but to a place you feel 'home'."
+  },
+  "rock-240": {
+    "name": "Dragon's Egg",
+    "rarity": "mythic",
+    "region": "volcanic",
+    "flavor": "A large, egg-shaped geode with deep red crystals and a warm exterior."
+  },
+  "rock-241": {
+    "name": "Red Beryl",
+    "rarity": "legendary",
+    "region": "mountain",
+    "flavor": "Also called 'Bixbite.' An extremely rare, raspberry-red emerald."
+  },
+  "rock-242": {
+    "name": "Grandidierite",
+    "rarity": "legendary",
+    "region": "coast",
+    "flavor": "One of the world's rarest minerals. A beautiful, translucent blue-green."
+  },
+  "rock-243": {
+    "name": "Jeremejevite",
+    "rarity": "legendary",
+    "region": "desert",
+    "flavor": "A rare, complex borate mineral that forms in perfect, blue, hexagonal crystals."
+  },
+  "rock-244": {
+    "name": "Cubic Zirconia",
+    "rarity": "legendary",
+    "region": "urban",
+    "flavor": "A flawless, man-made diamond simulant. So perfect, it's unnatural."
+  },
+  "rock-245": {
+    "name": "The Hope Diamond",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A copy... or is it? This deep-blue diamond feels heavy with history."
+  },
+  "rock-246": {
+    "name": "Enigmatite",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "This rock has no physical properties. It is a paradox in your hand."
+  },
+  "rock-247": {
+    "name": "World-Egg",
+    "rarity": "legendary",
+    "region": "cosmic",
+    "flavor": "A smooth, impossibly dense, perfectly oval stone. It contains everything."
+  },
+  "rock-248": {
+    "name": "Shard of the Void",
+    "rarity": "legendary",
+    "region": "cosmic",
+    "flavor": "It's not a rock. It's a piece of the nothing *between* the stars."
+  },
+  "rock-249": {
+    "name": "Fallen Star",
+    "rarity": "legendary",
+    "region": "grassland",
+    "flavor": "It landed in a field, still glowing with a soft, warm light."
+  },
+  "rock-250": {
+    "name": "Memory of the Forest",
+    "rarity": "legendary",
+    "region": "forest",
+    "flavor": "A piece of amber containing a single, perfect drop of ancient water."
+  },
+  "rock-251": {
+    "name": "First-Stone",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "The archetype. The very concept of 'rock'. It's surprisingly plain."
+  },
+  "rock-252": {
+    "name": "Last-Stone",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A rock from the end of time. It is perfectly smooth and has seen everything."
+  },
+  "rock-253": {
+    "name": "Primordial Magma",
+    "rarity": "legendary",
+    "region": "volcanic",
+    "flavor": "A piece of rock from the Earth's beginning, still liquid and impossibly hot."
+  },
+  "rock-254": {
+    "name": "Tear of a God",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A teardrop-shaped crystal. It's unclear if it came from joy or sorrow."
+  },
+  "rock-255": {
+    "name": "Chronos Crystal",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A quartz crystal that seems to tick. You can see your own reflection, but older."
+  },
+  "rock-256": {
+    "name": "Dwarven Hearthstone",
+    "rarity": "legendary",
+    "region": "mountain",
+    "flavor": "A fist-sized ruby, intricately carved. It radiates a comforting, deep warmth."
+  },
+  "rock-257": {
+    "name": "Elven Waystone",
+    "rarity": "legendary",
+    "region": "forest",
+    "flavor": "A moonstone so clear it seems to be made of pure, liquid light."
+  },
+  "rock-258": {
+    "name": "Mer-Queen's Pearl",
+    "rarity": "legendary",
+    "region": "abyss",
+    "flavor": "A pearl the size of an apple, with a luster that outshines the sun."
+  },
+  "rock-259": {
+    "name": "R'lyeh Tablet",
+    "rarity": "legendary",
+    "region": "abyss",
+    "flavor": "A fragment of a non-Euclidean, oily green stone. It hurts to look at."
+  },
+  "rock-260": {
+    "name": "The Philosopher's Stone",
+    "rarity": "legendary",
+    "region": "urban",
+    "flavor": "It's... real. It's not a rock, but it's not *not* a rock. It smells like ozone."
+  },
+  "rock-261": {
+    "name": "Petrified Lightning",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "Not Fulgurite. This is an actual lightning bolt, frozen in time. It crackles."
+  },
+  "rock-262": {
+    "name": "Core of the Iceberg",
+    "rarity": "legendary",
+    "region": "glacial",
+    "flavor": "A piece of ice that holds the 'soul' of a glacier. It speaks in a slow, grinding voice."
+  },
+  "rock-263": {
+    "name": "The Rock of Sisyphus",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A chip from the boulder. It's impossibly heavy and feels like pure futility."
+  },
+  "rock-264": {
+    "name": "The Blarney Stone",
+    "rarity": "legendary",
+    "region": "urban",
+    "flavor": "A tiny piece. Holding it makes you feel strangely charismatic."
+  },
+  "rock-265": {
+    "name": "Rosetta Stone (Copy)",
+    "rarity": "legendary",
+    "region": "urban",
+    "flavor": "A souvenir from a museum. It's just granite, but it feels important."
+  },
+  "rock-266": {
+    "name": "Aethelred's Crown Jewel",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A gem that was never meant to be found. It whispers promises of power."
+  },
+  "rock-267": {
+    "name": "Babel-Stone",
+    "rarity": "legendary",
+    "region": "desert",
+    "flavor": "A brick from the tower. When you hold it, all written words look like gibberish."
+  },
+  "rock-268": {
+    "name": "The Un-Stone",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A perfect, rock-shaped hole in reality. Your hand passes right through it."
+  },
+  "rock-269": {
+    "name": "My Pet Rock",
+    "rarity": "legendary",
+    "region": "urban",
+    "flavor": "A simple gray stone with googly eyes. It's the best rock. (1975 Limited Run)"
+  },
+  "rock-270": {
+    "name": "Gemini's Core",
+    "rarity": "legendary",
+    "region": "ethereal",
+    "flavor": "A flawless, man-made crystal that seems to contain infinite information."
+  }
+}

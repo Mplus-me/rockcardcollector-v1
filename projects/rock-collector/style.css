@@ -1,0 +1,1044 @@
+/* --- Variables & Style --- */
+
+:root {
+
+--primary-bg-color: #004D40; /* Pine teal */
+--primary-ac-color: #BF360C; /* Rusty spice */
+--secondary-bg-color: #880E4F; /* Dark raspberry */
+--secondary-ac-color: #49302B; /* Deep mocha */
+--header-txt-color: #E0DAB9; /* Sand dune */
+--body-txt-color: #e0dab9; /* Sand dune */
+--alt-txt-color: #49202b; /* Deep mocha */
+--hidden-txt-color: #D69147; /* Golden apricot */
+
+--card-rarity-1: #C9C1A5;
+--card-rarity-2: #88a236;
+--card-rarity-3: #9b59b6;
+--card-rarity-4: #f39c12;
+--card-rarity-5: #34e7e4;
+
+--body-font: 'Georgia', serif;
+--header-font: 'Verdana', sans-serif;
+}
+
+/* --- Basic Setup & Cozy Theme --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--primary-bg-color); /* A warm, parchment-like color */
+    color: var(--body-txt-color); /* A dark, earthy blue */
+}
+
+h1, h2 {
+    font-family: var(--header-font);
+    color: var(--header-txt-color); /* A cozy terracotta/rust color */
+    margin-bottom: 15px;
+}
+
+.game-header {
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--secondary-ac-color);
+}
+
+/* --- Main Layout (Nav + Content) --- */
+.app-container {
+    display: flex;
+    height: calc(100vh - 60px); /* Full height minus the header */
+}
+
+.main-nav {
+    width: 80px;
+    background-color: var(--secondary-ac-color); /* A light, earthy tan */
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 2px solid #C9C1A5;
+}
+
+.main-content {
+    flex-grow: 1; /* Takes up the rest of the space */
+    padding: 20px;
+    overflow-y: auto; /* Adds scrolling if content is too tall */
+}
+
+/* --- Panel Show/Hide System --- */
+.panel {
+    display: none; /* Hide all panels by default */
+}
+
+.panel.active-panel {
+    display: block; /* Show only the active one */
+}
+
+
+/* --- !IMPORTANT: Placeholder Image Styles --- */
+
+/* This makes our nav buttons look like buttons */
+.nav-button {
+    width: 60px;
+    height: 60px;
+    background-color: #C9C1A5;
+    border: 2px solid #3D405B;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    
+    /* This adds a nice "press" effect */
+    transition: transform 0.1s ease;
+}
+
+.nav-button:hover {
+    background-color: #bcae88;
+}
+
+.nav-button:active {
+    transform: scale(0.95);
+    border-color: #D95525;
+}
+
+/* --- 5. Archive Panel Styles --- */
+.card-grid {
+    display: grid;
+    /* This creates a responsive grid that fits as many 120px cards as it can */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card-in-grid {
+    position: relative;
+    background-color: #E0DAB9;
+    border: 3px solid #C9C1A5; /* Default border */
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    
+    /* Add a subtle shadow to make cards pop */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- Rarity Border Colors --- */
+/* We use the rarity from cards.json to color the borders */
+.card-in-grid.rarity-common { border-color: var(--card-rarity-1); }
+.card-in-grid.rarity-uncommon { border-color: var(--card-rarity-2); } /* Mossy Green */
+.card-in-grid.rarity-rare { border-color: var(--card-rarity-3); } /* Amethyst Purple */
+
+.card-in-grid.rarity-mythic { border-color: var(--card-rarity-4); } /* Gold/Orange */
+.card-in-grid.rarity-legendary { border-color: var(--card-rarity-5); } /* Bright Cyan/Diamond */
+.card-in-grid.rarity-special {
+    border-image: linear-gradient(45deg, #f39c12, #e74c3c, #9b59b6, #34e7e4) 1;
+}
+
+/* --- Card Image Placeholder --- */
+/* This is our placeholder for the card image */
+.card-image-placeholder {
+    width: 100%;
+    height: 100px; /* Give it a set height */
+    background-color: #f7f7f7; /* A very light gray */
+    border: 1px dashed #C9C1A5;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    
+    /* This part hides the broken image icon if the image 404s */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Will scale the image down if it's too big */
+    
+    /* Hides the 'alt' text and broken image icon if it fails to load */
+    color: transparent; 
+    font-size: 0;
+}
+
+/* --- Card Info (Name & Count) --- */
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2px;
+}
+
+.card-name {
+    font-size: 13px;
+    color: var(--alt-txt-color);
+    /* Prevents long names from breaking the layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-count {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--header-txt-color);
+    margin-left: 5px;
+    
+    /* Adds a nice little circle background */
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 1px 4px;
+    min-width: 20px;
+}
+
+/* --- 6. Museum Panel Styles --- */
+
+/* This is the main "stage" area */
+#museum-display {
+    width: 100%;
+    padding: 20px;
+    background-color: #3D405B; /* Dark earthy blue */
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* This div will hold the background image */
+#museum-background {
+    width: 100%;
+    min-height: 400px;
+    
+    /* Placeholder background */
+    background-color: #5a5f8a;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+    
+    /* In the future, this will be set by JS, e.g.: */
+    /* background-image: url('images/museum/bg-forest.png'); */
+    
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+/* We re-use the .card-grid class, but give the museum grid a specific height */
+#museum-grid {
+    min-height: 380px;
+}
+
+/* This is the style for an individual museum slot */
+.museum-slot {
+    width: 120px;
+    height: 170px; /* Taller than archive cards to look like a "slot" */
+    
+    /* Empty slot style */
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 3px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    
+    /* Center the placeholder text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* This style applies when a card is being DRAGGED OVER the slot */
+.museum-slot.drag-over {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: #fff;
+}
+
+/* This is the style for a slot that has a card IN it */
+.museum-slot.filled {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    /* We re-use the card style, but make it clickable */
+    cursor: pointer;
+}
+
+/* This is the style for a card being DRAGGED from the archive */
+.card-in-grid.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#museum-cosmetics {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--secondary-ac-color);
+    border-radius: 8px;
+}
+
+/* --- 7. Generic Button Style --- */
+/* We can reuse this for all our buttons */
+.game-button {
+    background-color: var(--header-txt-color); /* Rust */
+    color: #fff;
+    font-family: var(--header-font);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.game-button:hover {
+    background-color: #b9481f;
+}
+
+.game-button:disabled {
+    background-color: #C9C1A5; /* Grayed out */
+    color: var(--primary-bg-color);
+    cursor: not-allowed;
+}
+
+/* "Complete" button should stand out */
+.game-button.claim-button {
+    background-color: #88a236; /* Mossy Green */
+}
+.game-button.claim-button:hover {
+    background-color: #6d832b;
+}
+
+
+/* --- 8. Expeditions Panel Styles --- */
+#expedition-section, #minigame-section {
+    background-color: var(--secondary-ac-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.expedition-grid {
+    display: grid;
+    /* This will create 3 columns, each 1/3 of the space */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.expedition-slot {
+    background-color: var(--primary-bg-color); /* Light parchment */
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.expedition-slot h4 {
+    color: var(--body-txt-color);
+    margin-bottom: 5px;
+}
+
+.expedition-slot .status {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+    flex-grow: 1; /* Pushes button to the bottom */
+}
+
+.expedition-slot .timer {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--header-txt-color); /* Rust color */
+    margin-bottom: 10px;
+}
+
+/* --- 9. Header Pack Inventory Styles --- */
+.game-header {
+    /* Make the header a flexbox to align title and packs */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pack-inventory {
+    display: flex;
+    gap: 10px;
+}
+
+.pack-display {
+    background-color: var(--secondary-ac-color);
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-family: var(--header-font);
+    color: var(--body-txt-color);
+    text-align: center;
+}
+
+.pack-display .pack-count {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--header-txt-color); /* Rust */
+}
+
+.pack-display .pack-name {
+    font-size: 12px;
+}
+
+/* --- 10. Packs Panel Styles --- */
+.pack-section {
+    background-color: var(--secondary-ac-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* We can re-use .pack-display for the buttons */
+#pack-opening-area .pack-display {
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#pack-opening-area .pack-display:hover {
+    background-color: #c9c1a5;
+}
+
+#pack-opening-area .pack-display:active {
+    transform: scale(0.95);
+}
+
+/* Style for "disabled" (0 pack) buttons */
+#pack-opening-area .pack-display.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--secondary-ac-color);
+    transform: none;
+}
+#pack-opening-area .pack-display.disabled .pack-count {
+    color: #999;
+}
+
+.minigame-container h4 {
+    color: var(--body-txt-color);
+    margin-bottom: 5px;
+}
+
+/* Placeholder for the fishing pond */
+#fishing-pond {
+    margin-top: 10px;
+    padding: 20px;
+    background-color: #a2c5d1; /* Cozy pond blue */
+    border-radius: 5px;
+    text-align: center;
+    
+    /*  Placeholder background image */
+    background-image: url('images/ui/fishing-pond-bg.png');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #7a9ca7;
+    min-height: 150px;
+}
+
+#fishing-status {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 15px;
+    height: 20px; /* Give it a set height so layout doesn't jump */
+}
+
+/* --- 12. Duplicate Converter Styles --- */
+#converter-summary {
+    background-color: var(--primary-bg-color);
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--header-font);
+}
+
+#converter-points, #converter-reward {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--body-txt-color);
+}
+
+#converter-reward {
+    color: #88a236; /* Mossy Green */
+}
+
+/* This is the style for a card in the grid that has been clicked */
+.card-in-grid.selected {
+    box-shadow: 0 0 12px 3px #f39c12; /* A bright gold glow */
+    transform: scale(1.05);
+    background-color: #fdfbe9;
+}
+
+/* We re-use .card-in-grid, but make them clickable */
+#converter-grid .card-in-grid {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* --- 13. Placeholder Image Styles --- */
+
+/* Placeholder for the main game title */
+#game-title-logo {
+    width: 280px;
+    height: 80px;
+    background-color: var(--secondary-ac-color); /* Light tan */
+    
+    /* This vertically centers the 60px logo in the 80px header */
+    margin: -10px 0; 
+}
+
+/* Placeholder for the pack icons */
+.pack-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #C9C1A5; /* Darker tan */
+    border: 2px solid var(--secondary-ac-color);
+    border-radius: 5px;
+    margin: 0 auto 5px auto; /* Center it above the text */
+    
+    /* Hides broken image icon if it fails to load */
+    display: block;
+    overflow: hidden;
+    color: transparent;
+    font-size: 0;
+}
+
+/* --- 15. Expedition Image Styles --- */
+.expedition-image {
+    width: 100%;
+    height: 100px;
+    background-color: #C9C1A5;
+    border: 2px solid var(--secondary-ac-color);
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    /* Hides broken image icon */
+    display: block;
+    overflow: hidden;
+    color: transparent;
+    font-size: 0;
+}
+
+/* Make timers a bit smaller to fit new layout */
+.expedition-slot .timer {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+/* --- 14. Mobile Responsive Styles (FIXED) --- */
+
+@media (max-width: 768px) {
+    
+    /* This is the most important part.
+    We add 70px of "padding" to the bottom of the whole page,
+    so the new fixed nav bar won't hide the content underneath it.
+    */
+    body {
+        padding-bottom: 100px;
+    }
+
+    /* We turn off the desktop's "flex-direction: row"
+    and just make the container a normal "block".
+    */
+    .app-container {
+        display: block;
+    }
+
+    /* This is the magic. We "fix" the nav bar to the bottom
+    of the screen (viewport). It's now ripped out of the
+    page flow, so it's always visible.
+    */
+    .main-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px; /* Set a fixed height */
+
+        /* Make it a row instead of a column */
+        flex-direction: row;
+        justify-content: space-around; /* Evenly space buttons */
+        padding: 10px 0;
+        
+        /* Give it a solid background so content doesn't show through */
+        background-color: var(--secondary-ac-color); 
+        z-index: 100; /* Ensures it's on top of all other content */
+
+        /* Swap side border for a top border */
+        border-right: none;
+        border-top: 2px solid #C9C1A5;
+    }
+
+    .nav-button {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 0; /* Remove old spacing */
+    }
+
+    /* Since the nav is "fixed", the main content no longer
+    needs to worry about it. It just becomes a normal
+    full-width block. No 'calc()' or 'flex' math needed.
+    */
+    .main-content {
+        height: auto;
+    }
+
+    /* --- Other Mobile Style Tweaks --- */
+    .game-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #game-title-logo {
+        margin: 0;
+        width: 200px;
+        height: 45px;
+    }
+
+    .pack-inventory {
+        transform: scale(0.9);
+        gap: 5px;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+}
+
+/* --- 16. Progression Stats Styles --- */
+
+/* The "Unique Rocks" text in the Archive */
+.stat-subtitle {
+    font-family: var(--header-font);
+    font-size: 16px;
+    color: #88a236; /* Mossy Green - feels like an achievement */
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 2px dashed #C9C1A5;
+    padding-bottom: 10px;
+    display: inline-block; /* Only underline the text, not full width */
+}
+
+/* The "Packs Opened" text in the Packs panel */
+.quiet-stat {
+    font-size: 12px;
+    color: var(--hidden-txt-color); /* Muted gray */
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* --- 17. Archive Sorting Styles --- */
+
+.archive-header {
+    display: flex;
+    justify-content: space-between; /* Puts stats on left, sort on right */
+    align-items: center;
+    margin-bottom: 10px;
+    
+    /* Makes the bottom border from the old stat span full-width */
+    border-bottom: 2px dashed #C9C1A5;
+    padding-bottom: 10px;
+}
+
+/* Remove the old border/padding from the stat text */
+.quiet-stat {
+    margin-bottom: 0;
+}
+
+.sort-container {
+    font-size: 14px;
+    color: var(--body-txt-color);
+}
+
+/* This is our cozy-themed select dropdown */
+.cozy-select {
+    font-family: inherit;
+    font-size: 14px;
+    background-color: #fff;
+    border: 2px solid #C9C1A5;
+    border-radius: 5px;
+    padding: 3px 5px;
+    color: var(--body-txt-color);
+}
+
+/* Mobile tweak for the archive header */
+@media (max-width: 768px) {
+    .archive-header {
+        flex-direction: column; /* Stack on mobile */
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* --- 18. Minigame Hub Styles --- */
+
+/* This is the grid of buttons */
+.minigame-grid {
+    display: grid;
+    /* This creates a responsive grid of 140px buttons */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Style for the big game-selection buttons */
+.minigame-button {
+    background-color: var(--primary-bg-color); /* Light parchment */
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-family: var(--header-font);
+    font-size: 14px;
+    color: var(--body-txt-color);
+    font-weight: bold;
+}
+.minigame-button:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+}
+.minigame-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background-color: var(--secondary-ac-color);
+}
+
+/* Placeholder icon inside the button */
+.minigame-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #C9C1A5;
+    border: 2px dashed #bcae88;
+    border-radius: 5px;
+    margin: 0 auto 10px auto;
+    display: block;
+    overflow: hidden;
+}
+
+/* --- Hub Show/Hide Logic --- */
+
+/* Hide all game stages by default */
+#minigame-stages { display: none; }
+
+/* We re-use this class but now it's a child of #minigame-stages */
+.minigame-container { 
+    display: none; /* Hide all individual games */
+    background-color: var(--primary-bg-color);
+    border: 2px solid #C9C1A5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+/* This class will be added by JS to show the *active* game */
+.minigame-container.active-minigame { 
+    display: block; 
+}
+
+/* Style for the "Back" button */
+#minigame-back-btn {
+    margin-bottom: 15px;
+}
+
+/* --- 19. Rock Sifting Game Styles --- */
+
+#sifting-game-area {
+    user-select: none; /* Prevents dragging images */
+}
+
+.sifting-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-ac-color);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#sifting-find-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--body-txt-color);
+}
+
+#sifting-find-list li {
+    transition: color 0.3s ease;
+}
+
+/* Style for a 'found' item in the list */
+#sifting-find-list li.found {
+    text-decoration: line-through;
+    color: #88a236;
+}
+
+#sifting-timer {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--body-txt-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+#sifting-timer.danger {
+    color: #D95525; /* Rust color */
+    transform: scale(1.1);
+}
+
+/* This is the main "sandpit" */
+#sifting-sieve {
+    width: 100%;
+    height: 350px;
+    background-color: #f7eecf; /* Sandy color */
+    background-image: url('images/ui/sieve-bg.png'); /* Placeholder for your pixel art! */
+    background-size: cover; /* This makes the image cover the whole area */
+    background-position: center; /* Centers the image */
+    border: 3px solid #C9C1A5;
+    border-radius: 5px;
+    margin-top: 10px;
+    position: relative; /* CRITICAL: For placing rocks */
+    overflow: hidden;
+}
+
+/* This is an individual rock in the sieve */
+.sieve-rock {
+    position: absolute; /* CRITICAL: For random placement */
+    width: 50px; /* Base size */
+    height: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+    
+    /* We reuse the placeholder styles */
+    background-color: #C9C1A5;
+    border: 1px dashed #bcae88;
+    border-radius: 5px;
+}
+.sieve-rock:hover {
+    transform: scale(1.2) !important; /* !important to override random scale */
+    z-index: 10;
+}
+
+/* When a rock is found */
+.sieve-rock.found-rock {
+    opacity: 0;
+    transform: scale(0.5);
+    cursor: default;
+}
+
+/* "Wrong click" animation */
+.sieve-rock.shake {
+    animation: shake 0.3s 1;
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    50% { transform: translateX(5px) rotate(5deg); }
+    75% { transform: translateX(-5px) rotate(-5deg); }
+    100% { transform: translateX(0); }
+}
+
+/* --- 20. Pack Opening Modal Styles --- */
+
+/* The full-screen, semi-transparent background */
+.modal-overlay {
+    position: fixed; /* Glued to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(61, 64, 91, 0.7); /* Our dark blue, 70% transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* On top of everything */
+}
+
+/* The modal window itself */
+.modal-window {
+    background-color: var(--primary-bg-color); /* Parchment */
+    padding: 20px;
+    border-radius: 10px;
+    border: 3px solid #C9C1A5;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.modal-window h2 {
+    color: var(--header-txt-color); /* Rust */
+    margin-top: 0;
+}
+
+/* We re-use .card-grid, but we want 3 columns */
+#pack-reveal-grid {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+/* Style for the "Awesome!" button */
+.modal-close-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.modal-close-button img {
+    /* This is our placeholder style */
+    width: 150px;
+    height: 50px;
+    background-color: #88a236; /* Mossy Green */
+    border: 2px solid #6d832b;
+    border-radius: 8px;
+    transition: transform 0.1s ease;
+}
+.modal-close-button:hover img {
+    transform: scale(1.05);
+}
+.modal-close-button:active img {
+    transform: scale(0.95);
+}
+
+/* --- 21. Variant Visual Styles --- */
+
+/* The "NEW!" label for the pack modal */
+.new-label {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    
+    background-color: #f39c12; /* Gold */
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 4px;
+    border: 2px solid #fff;
+    
+    transform: rotate(15deg);
+    z-index: 9999; /* Topping the z-index of 1000 for the modal */
+    
+    /* Placeholder image for a 'new' icon */
+    /* background-image: url('images/ui/icon-new.png'); */
+}
+
+/* This makes the .new-label position correctly */
+.card-image-placeholder {
+    position: relative;
+}
+
+/* The FOIL Overlay */
+.foil-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Placeholder: A rainbow gradient */
+    /* This will be replaced by your 'foil.png' */
+    background: linear-gradient(
+        45deg,
+        rgba(255, 0, 0, 0.2),
+        rgba(255, 150, 0, 0.2),
+        rgba(255, 255, 0, 0.2),
+        rgba(0, 255, 0, 0.2),
+        rgba(0, 0, 255, 0.2),
+        rgba(255, 0, 255, 0.2)
+    );
+    
+    /* Your real image will look like this: */
+    /* background-image: url('images/overlays/foil.png'); */
+    
+    background-size: 200% 200%;
+    opacity: 0.6;
+    z-index: 2;
+    pointer-events: none; /* Lets you click the card underneath */
+    
+    /* Shimmer animation */
+    animation: shimmer 4s ease infinite;
+}
+
+/* Add this to .card-image-placeholder to contain the overlay */
+.card-image-placeholder {
+    overflow: hidden; /* This is now critical */
+}
+
+@keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Simple text label for variants in lists */
+.card-variant-label {
+    font-size: 10px;
+    font-style: italic;
+    color: var(--body-txt-color); /* Rust */
+    margin-left: 5px;
+}
+
+/* New style for destructive buttons */
+.game-button.danger-button {
+    background-color: #a40b0b;
+}
+.game-button.danger-button:hover {
+    background-color: #760A0A;
+}
+
+/* Container for the delete button */
+.delete-save-container {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px dashed #C9C1A5;
+    text-align: center;
+}
+
+/* --- 22. DevTools Styles --- */
+.dev-section {
+    background-color: var(--secondary-ac-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 2px dashed #C9C1A5;
+}
+
+.dev-controls {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dev-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.dev-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #C9C1A5;
+    font-family: var(--header-font);
+    width: 200px;
+}

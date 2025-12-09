@@ -1,0 +1,54 @@
+{
+  "riverbed": {
+    "name": "Riverbed",
+    "unlock": { "type": "packs", "value": 0 }
+  },
+  "grassland": {
+    "name": "Grassland",
+    "unlock": { "type": "packs", "value": 0 }
+  },
+  "forest": {
+    "name": "Forest",
+    "unlock": { "type": "packs", "value": 0 }
+  },
+  "desert": {
+    "name": "Desert",
+    "unlock": { "type": "unique", "value": 15 }
+  },
+  "coast": {
+    "name": "Coast",
+    "unlock": { "type": "packs", "value": 20 }
+  },
+  "mountain": {
+    "name": "Mountain",
+    "unlock": { "type": "unique", "value": 30 }
+  },
+  "cave": {
+    "name": "Cave",
+    "unlock": { "type": "unique", "value": 45 }
+  },
+  "volcanic": {
+    "name": "Volcanic",
+    "unlock": { "type": "packs", "value": 40 }
+  },
+  "urban": {
+    "name": "Urban",
+    "unlock": { "type": "unique", "value": 60 }
+  },
+  "glacial": {
+    "name": "Glacial",
+    "unlock": { "type": "packs", "value": 50 }
+  },
+  "abyss": {
+    "name": "Abyss",
+    "unlock": { "type": "unique", "value": 100 }
+  },
+  "ethereal": {
+    "name": "Ethereal",
+    "unlock": { "type": "packs", "value": 100 }
+  },
+  "cosmic": {
+    "name": "Cosmic",
+    "unlock": { "type": "packs", "value": 75 }
+  }
+}
